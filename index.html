@@ -214,9 +214,9 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;color:var(--oak)}
 
 /* ---------- the turning leaf ---------- */
 .leaf{position:absolute;z-index:10;transform-style:preserve-3d;pointer-events:none}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;display:flex}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;display:flex;color:var(--ink);background:var(--paper);font:16px/1.55 var(--sans)}
 .face>.pg{flex:1;overflow:hidden}
-.face.back{transform:rotateY(180deg)}
+.face.f-back{transform:rotateY(180deg)}
 .face .shade{position:absolute;inset:0;pointer-events:none;opacity:0}
 
 /* ---------- contents overlay ---------- */
@@ -708,16 +708,16 @@ function go(to){
   const pa=$$('.pg',A)[ai],pb=$$('.pg',B)[bi];
   const leaf=document.createElement('div');leaf.className='leaf';leaf.setAttribute('aria-hidden','true');
   Object.assign(leaf.style,{top:(r.top-br.top)+'px',height:r.height+'px',width:half+'px',left:(r.left-br.left+(dir>0?half:0))+'px',transformOrigin:dir>0?'left center':'right center'});
-  const f1=face('front',pa),f2=face('back',pb);leaf.append(f1,f2);book.append(leaf);
+  const f1=face('f-front',pa),f2=face('f-back',pb);leaf.append(f1,f2);book.append(leaf);
   A.classList.add('turning');pa.style.visibility='hidden';
   const ang=dir>0?-180:180,T=760,ease='cubic-bezier(.45,.05,.25,1)';
-  leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+ang/2+'deg) translateZ(30px)',offset:.5},{transform:'rotateY('+ang+'deg)'}],{duration:T,easing:ease});
+  const anim=leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+ang+'deg)'}],{duration:T,easing:ease,fill:'forwards'});
   $('.shade',f1).style.background='linear-gradient('+(dir>0?'90deg':'270deg')+',rgba(0,0,0,.35),rgba(0,0,0,0) 70%)';
   $('.shade',f2).style.background='linear-gradient('+(dir>0?'270deg':'90deg')+',rgba(0,0,0,.35),rgba(0,0,0,0) 70%)';
   $('.shade',f1).animate([{opacity:0},{opacity:1}],{duration:T/2,easing:'ease-in',fill:'forwards'});
   $('.shade',f2).animate([{opacity:1},{opacity:0}],{duration:T/2,delay:T/2,easing:'ease-out',fill:'forwards'});
   // the page underneath darkens slightly as the leaf passes over it
-  setTimeout(()=>{leaf.remove();done()},T);
+  anim.onfinish=()=>{done();requestAnimationFrame(()=>leaf.remove())};
 }
 const next=()=>go(cur+1),prev=()=>go(cur-1);
 $('#next').onclick=next;$('#prev').onclick=prev;
