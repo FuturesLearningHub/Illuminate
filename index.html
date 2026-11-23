@@ -331,6 +331,69 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
   .pg.play .mo,.pg.play .ph,.pg.bleed.play>img:first-child,.mag-art,.sheen::after,.intro .mag,.mag-head .ch,.intro .mag-side .ml,.intro .mag-line>*,.intro .mag-seal,.open-pill,.open-pill i{animation:none!important;opacity:1;filter:none;transform:none}
 }
 
+
+/* ================= podcast: Illuminate, out loud ================= */
+.listen{border-radius:999px;border:0;display:inline-flex;align-items:center;gap:.6rem;min-height:40px;padding:0 1.05rem 0 .5rem;cursor:pointer;color:#fff;font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem}
+.listen .ic{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center}
+.listen .ic svg{width:12px;height:12px}
+.listen:hover{box-shadow:inset 0 1px 1px rgba(255,255,255,.18),0 0 26px rgba(207,174,112,.35)}
+.top .right{display:flex;gap:.6rem;align-items:center}
+.pod{position:fixed;left:50%;bottom:calc(var(--foot) + 10px);transform:translate(-50%,calc(100% + 40px));width:min(760px,calc(100vw - 24px));z-index:30;border-radius:22px;padding:14px 16px 12px;color:#fff;transition:transform .55s var(--ease-out),opacity .4s;opacity:0;pointer-events:none;background:rgba(18,16,14,.72)}
+.pod.open{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.pod-row{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.pod .art{width:58px;height:58px;border-radius:12px;background:url(img/cover-art.jpg) center 30%/cover;box-shadow:0 6px 18px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.pod .art::after{content:"";position:absolute;inset:0;border:1.5px solid rgba(207,174,112,.7);border-radius:12px}
+.pod .ctrls{display:flex;align-items:center;gap:6px}
+.pbtn{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;font-family:var(--cond);font-size:.6rem;font-weight:700;position:relative}
+.pbtn:hover{background:rgba(255,255,255,.08)}
+.pbtn.play{width:50px;height:50px;background:var(--gold);color:var(--ink)}
+.pbtn.play:hover{background:#dcc08a}
+.pbtn svg{width:18px;height:18px}
+.pbtn .s{position:absolute;bottom:7px;font-size:.52rem}
+.pod .meta2{min-width:0}
+.pod .ttl{font-family:var(--display);font-size:1.15rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pod .ttl em{font-family:var(--serif);font-style:italic;color:var(--gold)}
+.pod .sub{font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.62rem;color:rgba(255,255,255,.65);margin-top:2px}
+.hosts{display:flex;gap:6px;align-items:center}
+.host{display:flex;align-items:center;gap:6px;padding:4px 9px 4px 4px;border-radius:999px;background:rgba(255,255,255,.05);font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.6rem;color:rgba(255,255,255,.6);transition:background .3s,color .3s}
+.host .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#fff;font-size:.62rem}
+.host.on{background:rgba(207,174,112,.18);color:#fff}
+.host.on .dot{background:var(--gold);color:var(--ink)}
+.bars{display:inline-flex;gap:2px;align-items:flex-end;height:12px;width:14px;opacity:0;transition:opacity .2s}
+.host.on .bars{opacity:1}
+.bars i{width:2px;background:var(--gold);height:30%;border-radius:1px;animation:eq .9s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.15s}.bars i:nth-child(3){animation-delay:.3s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.paused .bars i{animation-play-state:paused}
+.cap{margin:10px 2px 8px;min-height:2.7em;font-family:var(--serif);font-size:1.02rem;line-height:1.35;color:#fff}
+.cap b{font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.62rem;color:var(--gold);margin-right:.5rem}
+.seek{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-family:var(--cond);font-weight:700;font-size:.68rem;letter-spacing:.08em;color:rgba(255,255,255,.7)}
+.seek input{width:100%;accent-color:var(--gold);height:20px}
+.pod-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.tog{display:inline-flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.62rem;color:rgba(255,255,255,.75);background:none;border:0;cursor:pointer;padding:6px 0}
+.tog .sw{width:28px;height:16px;border-radius:999px;background:rgba(255,255,255,.2);position:relative;transition:background .2s}
+.tog .sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .2s}
+.tog[aria-pressed="true"] .sw{background:var(--gold)}
+.tog[aria-pressed="true"] .sw::after{transform:translateX(12px)}
+.ai-note{font-size:.66rem;color:rgba(255,255,255,.5)}
+.tx{max-height:0;overflow:auto;transition:max-height .4s var(--ease-out);margin-top:4px}
+.tx.open{max-height:30vh}
+.tx ol{list-style:none;margin:0;padding:6px 0 0;border-top:1px solid rgba(255,255,255,.12)}
+.tx li{padding:5px 6px;border-radius:8px;font-size:.86rem;line-height:1.4;color:rgba(255,255,255,.72);cursor:pointer}
+.tx li b{font-family:var(--cond);letter-spacing:.1em;text-transform:uppercase;font-size:.6rem;color:var(--gold);margin-right:.4rem}
+.tx li.on{background:rgba(207,174,112,.14);color:#fff}
+.pod-x{position:absolute;top:8px;right:10px;width:32px;height:32px;border-radius:50%;border:0;background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font-size:1.1rem}
+.pod-x:hover{background:rgba(255,255,255,.08);color:#fff}
+body.listening .foot{opacity:.35}
+@media (max-width:900px){
+  .listen .lbl-l{display:none}.listen{padding:0 .5rem}
+  .pod-row{grid-template-columns:auto minmax(0,1fr) auto}
+  .pod .art{display:none}
+  .hosts{display:none}
+  .cap{font-size:.95rem}
+}
+@media (prefers-reduced-motion:reduce){.bars i{animation:none;height:70%}}
+
 /* ---------- phones and small tablets: one page per screen, scroll then swipe ---------- */
 @media (max-width:900px){
   .top .word,.top .issue{display:none}
@@ -366,9 +429,12 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
     <span class="word" aria-hidden="true">ILLUMINATE</span>
   </a>
   <span class="issue">Vol 3.11 · November 2026</span>
+  <span class="right">
+  <button class="listen glass" id="listen" aria-controls="pod" aria-expanded="false"><span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2 1l9 5-9 5z"/></svg></span><span class="lbl-l">Listen to the issue</span><span class="sr"> as a podcast</span></button>
   <button class="tbtn glass" id="open-grid" aria-haspopup="dialog" aria-controls="grid">
     <svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M1 1h6v6H1zm8 0h6v6H9zM1 9h6v6H1zm8 0h6v6H9z"/></svg>All pages
   </button>
+  </span>
 </header>
 
 <button class="arrow prev glass" id="prev" aria-label="Previous page"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2" d="M15 4l-8 8 8 8"/></svg></button>
@@ -703,6 +769,29 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
   <span class="count glass" id="where" aria-hidden="true"></span>
 </footer>
 
+<section class="pod glass paused" id="pod" aria-label="Illuminate, out loud. Podcast player" aria-hidden="true">
+  <button class="pod-x" id="pod-x" aria-label="Close player">×</button>
+  <div class="pod-row">
+    <div class="art" aria-hidden="true"></div>
+    <div class="ctrls">
+      <button class="pbtn" id="p-back" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg><span class="s">15</span></button>
+      <button class="pbtn play" id="p-play" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="p-ico" fill="currentColor" d="M7 4l13 8-13 8z"/></svg></button>
+      <button class="pbtn" id="p-fwd" aria-label="Forward 15 seconds"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M20 12a8 8 0 1 1-3-6.2M20 4v4h-4"/></svg><span class="s">15</span></button>
+    </div>
+    <div class="meta2"><div class="ttl">Illuminate, <em>out loud</em>.</div><div class="sub">November 2026 · A conversation about this issue</div></div>
+    <div class="hosts" aria-hidden="true"><span class="host" data-h="A"><span class="dot">1</span>Host<span class="bars"><i></i><i></i><i></i></span></span><span class="host" data-h="B"><span class="dot">2</span>Host<span class="bars"><i></i><i></i><i></i></span></span></div>
+  </div>
+  <p class="cap" id="p-cap" aria-live="polite"><b>Ready</b>Press play. The pages turn with the conversation.</p>
+  <div class="seek"><span id="p-cur">0:00</span><input type="range" id="p-seek" min="0" max="1000" value="0" aria-label="Seek"><span id="p-dur">4:37</span></div>
+  <div class="pod-foot">
+    <button class="tog" id="p-follow" aria-pressed="true"><span class="sw" aria-hidden="true"></span>Turn pages with the hosts</button>
+    <button class="tog" id="p-tx" aria-pressed="false" aria-controls="p-txl"><span class="sw" aria-hidden="true"></span>Transcript</button>
+    <span class="ai-note">AI-generated voices. Every fact is from this issue.</span>
+  </div>
+  <div class="tx" id="p-txl"><ol id="p-lines"></ol></div>
+  <audio id="p-audio" preload="metadata" src="media/illuminate-nov-2026-podcast.mp3"></audio>
+</section>
+
 <div class="grid" id="grid" role="dialog" aria-modal="true" aria-labelledby="grid-h">
   <header><h2 id="grid-h">All <em>pages</em>.</h2><button class="tbtn" id="close-grid">Close</button></header>
   <div class="thumbs" id="thumbs"></div>
@@ -939,6 +1028,50 @@ function openGrid(){lastFocus=document.activeElement;$('#grid').classList.add('o
 function closeGrid(){if(!$('#grid').classList.contains('open'))return;$('#grid').classList.remove('open');$('#open-grid').setAttribute('aria-expanded','false');lastFocus&&lastFocus.focus()}
 $('#open-grid').onclick=openGrid;$('#close-grid').onclick=closeGrid;
 $('#grid').addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('button',$('#grid')),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
+
+
+// ================= podcast player =================
+(function(){
+  const LINES=[{"t": 0.4, "s": "A", "x": "Hey, welcome in. This is Illuminate, out loud. The November issue.", "p": "cover"}, {"t": 5.75, "s": "B", "x": "And it's a good one. Like, genuinely. There's a lot going on this month.", "p": "cover"}, {"t": 10.34, "s": "A", "x": "There is. Okay, so where do you want to start?", "p": "cover"}, {"t": 13.66, "s": "B", "x": "I mean, we have to start with the cover, right?", "p": "cover"}, {"t": 17.13, "s": "A", "x": "We have to. So, Sydney Savion, who leads People, Culture and Belonging, just got named to the N2Growth Leaders40 list.", "p": "cover-story"}, {"t": 25.99, "s": "B", "x": "Which, okay, for people who don't know... what is that, exactly?", "p": "cover-story"}, {"t": 30.7, "s": "A", "x": "It's basically a ranking of the top chief HR officers in the world. Forty of them. Worldwide.", "p": "cover-story"}, {"t": 37.48, "s": "B", "x": "Forty. In the whole world.", "p": "cover-story"}, {"t": 39.99, "s": "A", "x": "In the whole world. And it's not a popularity thing, either. They go through thousands of nominations, they interview hundreds of executives, and it's been run with Stanford's business school since 2020.", "p": "cover-story-2"}, {"t": 52.28, "s": "B", "x": "Okay, that's legit. And the story connects it back to stuff people here actually use, right? Like the Talent Marketplace, the Futures Learning Hub, Voyage...", "p": "cover-story-2"}, {"t": 62.11, "s": "A", "x": "Right, and the new approach to performance management. But honestly? My favorite part was a quote from the N2Growth chairman. He said she knows staff of every level and station by name.", "p": "cover-story-2"}, {"t": 74.68, "s": "B", "x": "Yeah. That's the kind of thing you can't fake.", "p": "cover-story-2"}, {"t": 77.93, "s": "A", "x": "No. You really can't.", "p": "cover-story-2"}, {"t": 80.56, "s": "B", "x": "Okay, can I jump to Staff Stories? Because this one got me.", "p": "staff-stories"}, {"t": 84.57, "s": "A", "x": "I knew you were going to say that. Tina Soo.", "p": "staff-stories"}, {"t": 88.75, "s": "B", "x": "Tina Soo! So she's a program coordinator in Economics. She works with the masters and PhD students...", "p": "staff-stories"}, {"t": 95.93, "s": "A", "x": "And what surprised her most about the job is how hard the students work. She said she never did a PhD, so she had no idea how long those hours are.", "p": "staff-stories-2"}, {"t": 105.07, "s": "B", "x": "Which, fair. Nobody tells you. But okay, the story. So this past summer, an alumna from the masters program, class of 1972, comes back to Nashville. First time since she graduated.", "p": "staff-stories-2"}, {"t": 118.83, "s": "A", "x": "With her sons.", "p": "staff-stories-2"}, {"t": 120.23, "s": "B", "x": "With her sons! And it's summer, so the classrooms are empty. And she just sits down at a desk and pretends to study while they take pictures.", "p": "staff-stories-2"}, {"t": 128.66, "s": "A", "x": "Oh, I love that so much.", "p": "staff-stories-2"}, {"t": 131.16, "s": "B", "x": "More than fifty years later. Right back in the seat.", "p": "staff-stories-2"}, {"t": 134.88, "s": "A", "x": "And then Tina says, if she's contributed to any of that growth, it gives her purpose. Which... yeah. That's kind of the whole job, isn't it?", "p": "staff-stories-2"}, {"t": 144.3, "s": "B", "x": "That's the whole job. Okay. Can we do numbers? I want to do numbers.", "p": "fall-assembly"}, {"t": 149.0, "s": "A", "x": "Go. Do your numbers.", "p": "fall-assembly"}, {"t": 151.96, "s": "B", "x": "Fall Staff Assembly. $4.5 billion raised in Dare to Grow. More than 54,000 people applied to be in the Class of 2030. And the admit rate? 4.6%. A record low.", "p": "fall-assembly"}, {"t": 166.25, "s": "A", "x": "Four point six. That's wild.", "p": "fall-assembly"}, {"t": 168.95, "s": "B", "x": "It's a hard place to get into.", "p": "fall-assembly"}, {"t": 171.52, "s": "A", "x": "It really is. But what stuck with me was how simple the Chancellor's message to staff was. He said he hopes Vanderbilt is a place where you can see the difference your work makes.", "p": "fall-assembly"}, {"t": 182.67, "s": "B", "x": "Mm. And then the USAC president, Jeremy Bourgoin, got up and talked about wins on parental leave, holidays and the retirement match. So, you know. The practical stuff.", "p": "fall-assembly-2"}, {"t": 193.7, "s": "A", "x": "The stuff you actually feel.", "p": "fall-assembly-2"}, {"t": 196.36, "s": "B", "x": "Exactly.", "p": "fall-assembly-2"}, {"t": 197.86, "s": "A", "x": "Okay, I want to give people one thing to actually do this week. There's a gratitude piece in here with a tip I really liked. Be specific. So instead of, “I'm grateful for my coworkers,” it's, “I'm grateful my coworker checked in before my presentation.”", "p": "gratitude"}, {"t": 214.53, "s": "B", "x": "Oh, that's good. Because the specific one actually lands.", "p": "gratitude"}, {"t": 218.9, "s": "A", "x": "It does! And you can send it as a Shoutout in Personify Health. Points are doubled all of November.", "p": "gratitude"}, {"t": 225.8, "s": "B", "x": "Double points. Okay, I'm in. Quick hits before we go. The Veterans Day Breakfast is in here, and the Leadership Redefined Symposium for its fourth cohort.", "p": "veterans"}, {"t": 236.99, "s": "A", "x": "And the calendar. The Benefits Holiday Celebration is December 2nd, and they're collecting books, blankets and stuffed animals for Monroe Carell Jr. Children's Hospital.", "p": "around-campus"}, {"t": 247.48, "s": "B", "x": "And then Turkey Toss. December 11th, Student Life Center. You get a beanie or a frozen turkey. They even have halal and tofurkey.", "p": "holiday"}, {"t": 256.72, "s": "A", "x": "And if you're working over Thanksgiving, check the issue for free tickets to the Tennessee game on November 28th. There's just one rule.", "p": "holiday"}, {"t": 265.53, "s": "B", "x": "No orange.", "p": "holiday"}, {"t": 266.52, "s": "A", "x": "No orange. Black and gold only.", "p": "holiday"}, {"t": 270.6, "s": "B", "x": "That's November. Go thank somebody whose work happens behind the scenes.", "p": "back-cover"}, {"t": 275.32, "s": "A", "x": "See you next issue.", "p": "back-cover"}];
+  const pod=$('#pod'),au=$('#p-audio'),cap=$('#p-cap'),seek=$('#p-seek'),play=$('#p-play'),ico=$('#p-ico'),fol=$('#p-follow');
+  const fmt=t=>{t=Math.max(0,t|0);return (t/60|0)+':'+String(t%60).padStart(2,'0')};
+  $('#p-lines').innerHTML=LINES.map((l,i)=>'<li data-i="'+i+'"><b>Host '+(l.s==='A'?1:2)+'</b>'+l.x+'</li>').join('');
+  let li=-1,follow=true,auto=false;
+  function openPod(){pod.classList.add('open');pod.setAttribute('aria-hidden','false');$('#listen').setAttribute('aria-expanded','true');document.body.classList.add('listening')}
+  function closePod(){au.pause();pod.classList.remove('open');pod.setAttribute('aria-hidden','true');$('#listen').setAttribute('aria-expanded','false');document.body.classList.remove('listening');$('#listen').focus()}
+  $('#listen').addEventListener('click',()=>{if(pod.classList.contains('open')){au.paused?au.play():au.pause()}else{openPod();au.play().catch(()=>{})}});
+  $('#pod-x').addEventListener('click',closePod);
+  play.addEventListener('click',()=>au.paused?au.play():au.pause());
+  $('#p-back').addEventListener('click',()=>au.currentTime=Math.max(0,au.currentTime-15));
+  $('#p-fwd').addEventListener('click',()=>au.currentTime=Math.min(au.duration||1e9,au.currentTime+15));
+  seek.addEventListener('input',()=>{if(au.duration)au.currentTime=seek.value/1000*au.duration});
+  fol.addEventListener('click',()=>{follow=fol.getAttribute('aria-pressed')!=='true';fol.setAttribute('aria-pressed',follow);if(follow&&li>-1)sync(LINES[li].p)});
+  $('#p-tx').addEventListener('click',e=>{const b=e.currentTarget,on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);$('#p-txl').classList.toggle('open',on)});
+  $('#p-lines').addEventListener('click',e=>{const l=e.target.closest('li');if(!l)return;au.currentTime=LINES[l.dataset.i].t+.01;au.play().catch(()=>{})});
+  const setIcon=p=>{ico.setAttribute('d',p?'M7 4l13 8-13 8z':'M6 4h4v16H6zM14 4h4v16h-4z');play.setAttribute('aria-label',p?'Play':'Pause');pod.classList.toggle('paused',p);
+    $('#listen .ic').innerHTML=p?'<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2 1l9 5-9 5z"/></svg>':'<svg viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M2 1h3v10H2zM7 1h3v10H7z"/></svg>'};
+  au.addEventListener('play',()=>setIcon(false));au.addEventListener('pause',()=>setIcon(true));
+  au.addEventListener('loadedmetadata',()=>$('#p-dur').textContent=fmt(au.duration));
+  function sync(id){const i=S.findIndex(s=>s.id===id);if(i<0||i===cur&&!busy)return;auto=true;go(i);setTimeout(()=>auto=false,50)}
+  au.addEventListener('timeupdate',()=>{
+    const t=au.currentTime;$('#p-cur').textContent=fmt(t);if(au.duration)seek.value=Math.round(t/au.duration*1000);
+    let k=0;for(let i=0;i<LINES.length;i++){if(LINES[i].t<=t+.05)k=i;else break}
+    if(k!==li){li=k;const l=LINES[k];cap.innerHTML='<b>Host '+(l.s==='A'?1:2)+'</b>'+l.x;
+      $$('.host',pod).forEach(h=>h.classList.toggle('on',h.dataset.h===l.s));
+      $$('#p-lines li').forEach((x,i)=>x.classList.toggle('on',i===k));
+      const on=$('#p-lines li.on');if(on&&$('#p-txl').classList.contains('open'))on.scrollIntoView({block:'nearest'});
+      if(follow)sync(l.p)}
+  });
+  au.addEventListener('ended',()=>{$$('.host',pod).forEach(h=>h.classList.remove('on'));cap.innerHTML='<b>Thanks for listening</b>See you next issue.'});
+  // reading on your own pauses page following, so the hosts never yank the page away
+  const manual=()=>{if(!auto&&follow&&!au.paused){follow=false;fol.setAttribute('aria-pressed','false')}};
+  ['#next','#prev','#track','#thumbs','#toc'].forEach(sel=>{const el=$(sel);el&&el.addEventListener('click',manual)});
+  document.addEventListener('keydown',e=>{if(/Arrow|Page|Home|End/.test(e.key)&&!e.target.closest('input'))manual()});
+  book.addEventListener('wheel',manual,{passive:true});book.addEventListener('touchend',manual,{passive:true});
+  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:'Illuminate, out loud',artist:'Vanderbilt People, Culture and Belonging',album:'November 2026',artwork:[{src:'img/cover-art.jpg',sizes:'512x512',type:'image/jpeg'}]});
+    navigator.mediaSession.setActionHandler('seekbackward',()=>au.currentTime-=15);navigator.mediaSession.setActionHandler('seekforward',()=>au.currentTime+=15)}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pod.classList.contains('open')&&!$('#grid').classList.contains('open'))closePod()});
+})();
 
 // deep links
 function fromHash(){const id=location.hash.slice(1),i=S.findIndex(s=>s.id===id);return i>-1?i:0}
