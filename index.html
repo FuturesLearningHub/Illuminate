@@ -67,9 +67,9 @@ button{font:inherit;color:inherit}
 .arrow[disabled]{opacity:0;pointer-events:none}
 
 /* ---------- the book ---------- */
-.book{position:fixed;top:var(--bar);bottom:var(--foot);left:0;right:0;perspective:2800px}
+.book{position:fixed;top:var(--bar);bottom:var(--foot);left:0;right:0}
 .spread{position:absolute;top:clamp(8px,1.8vh,22px);bottom:clamp(6px,1vh,12px);left:clamp(52px,5vw,90px);right:clamp(52px,5vw,90px);margin:0 auto;max-width:1560px;
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--paper);color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.9),0 10px 24px -12px rgba(0,0,0,.6);visibility:hidden;transform-style:preserve-3d}
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--paper);color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.9),0 10px 24px -12px rgba(0,0,0,.6);visibility:hidden}
 .spread.on{visibility:visible}
 .spread::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:70px;margin-left:-35px;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.07) 40%,rgba(0,0,0,.16) 50%,rgba(0,0,0,.07) 60%,rgba(0,0,0,0) 100%);z-index:3}
 .spread.solo{grid-template-columns:1fr;background:transparent;box-shadow:none}
@@ -213,8 +213,8 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;color:var(--oak)}
 .back dd{margin:0;font-size:.92rem;color:rgba(255,255,255,.85)}
 
 /* ---------- the turning leaf ---------- */
-.leaf{position:absolute;z-index:10;transform-style:preserve-3d;pointer-events:none}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;display:flex;color:var(--ink);background:var(--paper);font:16px/1.55 var(--sans)}
+.leaf{position:absolute;z-index:10;pointer-events:none;will-change:transform}
+.face{position:absolute;inset:0;overflow:hidden;display:flex;color:var(--ink);background:var(--paper);font:16px/1.55 var(--sans)}
 .face>.pg{flex:1;overflow:hidden}
 .face.f-back{transform:rotateY(180deg)}
 .face .shade{position:absolute;inset:0;pointer-events:none;opacity:0}
@@ -958,7 +958,7 @@ function go(to){
   B.classList.add('on');B.style.zIndex=1;A.style.zIndex=2;
   const solo=A.classList.contains('solo')||B.classList.contains('solo')||narrow.matches;
   if(solo){
-    const out=A.animate([{transform:'rotateY(0) translateZ(0)',opacity:1},{transform:'rotateY('+(dir>0?-28:28)+'deg) translateX('+(dir>0?-6:6)+'%)',opacity:0}],{duration:520,easing:'cubic-bezier(.5,0,.2,1)'});
+    const out=A.animate([{transform:'perspective(2400px) rotateY(0deg)',opacity:1},{transform:'perspective(2400px) rotateY('+(dir>0?-28:28)+'deg) translateX('+(dir>0?-6:6)+'%)',opacity:0}],{duration:520,easing:'cubic-bezier(.5,0,.2,1)'});
     A.style.transformOrigin=dir>0?'left center':'right center';
     B.animate([{opacity:0,transform:'scale(.97)'},{opacity:1,transform:'scale(1)'}],{duration:520,easing:'cubic-bezier(.3,0,.2,1)'});
     out.onfinish=()=>{A.style.transformOrigin='';done()};
@@ -978,11 +978,11 @@ function go(to){
   sh1.style.background='linear-gradient('+(dir>0?'90deg':'270deg')+',rgba(0,0,0,.38),rgba(0,0,0,0) 75%)';
   sh2.style.background='linear-gradient('+(dir>0?'270deg':'90deg')+',rgba(0,0,0,.38),rgba(0,0,0,0) 75%)';
   sh1.animate([{opacity:0},{opacity:1}],{duration:T1,easing:'ease-in',fill:'forwards'});
-  const a1=leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+(sg*90)+'deg)'}],{duration:T1,easing:'cubic-bezier(.5,0,.75,.4)',fill:'forwards'});
+  const a1=leaf.animate([{transform:'perspective(2400px) rotateY(0deg)'},{transform:'perspective(2400px) rotateY('+(sg*90)+'deg)'}],{duration:T1,easing:'cubic-bezier(.5,0,.75,.4)',fill:'forwards'});
   a1.onfinish=()=>{
     f1.style.visibility='hidden';f2.style.visibility='visible';
     sh2.style.opacity=1;sh2.animate([{opacity:1},{opacity:0}],{duration:T2,easing:'ease-out',fill:'forwards'});
-    const a2=leaf.animate([{transform:'rotateY('+(sg*90)+'deg)'},{transform:'rotateY('+(sg*180)+'deg)'}],{duration:T2,easing:'cubic-bezier(.25,.6,.35,1)',fill:'forwards'});
+    const a2=leaf.animate([{transform:'perspective(2400px) rotateY('+(sg*90)+'deg)'},{transform:'perspective(2400px) rotateY('+(sg*180)+'deg)'}],{duration:T2,easing:'cubic-bezier(.25,.6,.35,1)',fill:'forwards'});
     a2.onfinish=()=>{done();requestAnimationFrame(()=>leaf.remove())};
   };
 }
