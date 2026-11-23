@@ -135,6 +135,8 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;color:var(--oak)}
 .mag-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .mag-frame{position:absolute;inset:2.4cqw;border:.5cqw solid var(--gold)}
 .mag-top{position:absolute;left:5cqw;right:5cqw;top:4.6cqw}
+.mag-top::before{content:"";position:absolute;left:-5cqw;right:-5cqw;top:-4.6cqw;height:38cqw;z-index:-1;background:linear-gradient(180deg,rgba(247,243,238,.82) 0%,rgba(247,243,238,.55) 45%,rgba(247,243,238,0) 100%);pointer-events:none}
+.mag-top{z-index:1}
 .mag-strip{display:flex;justify-content:space-between;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:2.4cqw;padding-bottom:1cqw;border-bottom:.35cqw solid var(--ink)}
 .mag-head{display:block;font-family:var(--display);font-size:14.6cqw;line-height:.9;letter-spacing:-.015em;margin-top:1.4cqw;text-align:center;mix-blend-mode:multiply}
 .mag-side{position:absolute;left:3.6cqw;top:32cqw;display:grid;gap:3cqw;width:42cqw;padding:2.4cqw 3cqw 3cqw 2.4cqw;background:linear-gradient(90deg,rgba(247,243,238,.9) 0%,rgba(247,243,238,.78) 60%,rgba(247,243,238,0) 100%);text-align:left}
@@ -341,7 +343,7 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
 .pod{position:fixed;left:50%;bottom:calc(var(--foot) + 10px);transform:translate(-50%,calc(100% + 40px));width:min(760px,calc(100vw - 24px));z-index:30;border-radius:22px;padding:14px 16px 12px;color:#fff;transition:transform .55s var(--ease-out),opacity .4s;opacity:0;pointer-events:none;background:rgba(18,16,14,.72)}
 .pod.open{transform:translate(-50%,0);opacity:1;pointer-events:auto}
 .pod-row{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:14px;align-items:center}
-.pod .art{width:58px;height:58px;border-radius:12px;background:url(img/cover-art.jpg) center 30%/cover;box-shadow:0 6px 18px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.pod .art{width:58px;height:58px;border-radius:12px;background:url(img/cover-art-v2.jpg) center 30%/cover;box-shadow:0 6px 18px rgba(0,0,0,.4);position:relative;overflow:hidden}
 .pod .art::after{content:"";position:absolute;inset:0;border:1.5px solid rgba(207,174,112,.7);border-radius:12px}
 .pod .ctrls{display:flex;align-items:center;gap:6px}
 .pbtn{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;font-family:var(--cond);font-size:.6rem;font-weight:700;position:relative}
@@ -443,10 +445,10 @@ body.listening .foot{opacity:.35}
 <main class="book" id="book" tabindex="-1" aria-roledescription="magazine" aria-label="Illuminate, November 2026">
 
 <!-- 1. COVER -->
-<section class="spread solo" id="cover" data-label="Cover" data-thumb="img/cover-art.jpg" aria-roledescription="spread" aria-label="Cover">
+<section class="spread solo" id="cover" data-label="Cover" data-thumb="img/cover-art-v2.jpg" aria-roledescription="spread" aria-label="Cover">
   <div class="coverwrap">
     <button class="mag sheen" data-next aria-label="Open the issue">
-      <img class="mag-art" src="img/cover-art.jpg" alt="">
+      <img class="mag-art" src="img/cover-art-v2.jpg" alt="">
       <span class="mag-frame" aria-hidden="true"></span><span class="glint" aria-hidden="true"></span>
       <span class="mag-top"><span class="mag-strip"><span>The Magazine for Vanderbilt Staff</span><span>Vol 3.11 · November 2026</span></span><span class="mag-head">ILLUMINATE</span></span>
       <span class="mag-side">
@@ -457,7 +459,7 @@ body.listening .foot{opacity:.35}
       <span class="mag-line"><img class="mag-seal" src="img/leaders40.jpg" alt=""><span class="k">Cover Story · Top CHRO 2026</span><span class="h">One of <em>forty</em>.</span><span class="d">Sydney Savion joins the world's top chief human resources officers</span></span>
     </button>
     <span class="open-pill glass" aria-hidden="true"><i></i><span class="dk">Click to open · or use the arrow keys</span><span class="mb">Tap or swipe to open</span></span>
-    <span class="sr">Cover art: watercolor of the Vanderbilt University footbridge under autumn leaves.</span>
+    <span class="sr">Cover art: watercolor of a stacked bronze sculpture on campus beneath red and gold autumn trees, with people strolling under a bright sky.</span>
   </div>
 </section>
 
@@ -744,7 +746,7 @@ body.listening .foot{opacity:.35}
 </section>
 
 <!-- 16. BACK COVER -->
-<section class="spread solo" id="back-cover" data-label="Back Cover" data-title="Let's connect" data-thumb="img/cover-art.jpg" aria-roledescription="spread" aria-label="Back cover">
+<section class="spread solo" id="back-cover" data-label="Back Cover" data-title="Let's connect" data-thumb="img/cover-art-v2.jpg" aria-roledescription="spread" aria-label="Back cover">
   <div class="pg back">
     <div class="glass">
       <img src="assets/vu-lockup-white.png" alt="Vanderbilt University" style="height:34px;width:auto;margin:0 auto 1.6rem">
@@ -1068,7 +1070,7 @@ $('#grid').addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('bu
   ['#next','#prev','#track','#thumbs','#toc'].forEach(sel=>{const el=$(sel);el&&el.addEventListener('click',manual)});
   document.addEventListener('keydown',e=>{if(/Arrow|Page|Home|End/.test(e.key)&&!e.target.closest('input'))manual()});
   book.addEventListener('wheel',manual,{passive:true});book.addEventListener('touchend',manual,{passive:true});
-  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:'Illuminate, out loud',artist:'Vanderbilt People, Culture and Belonging',album:'November 2026',artwork:[{src:'img/cover-art.jpg',sizes:'512x512',type:'image/jpeg'}]});
+  if('mediaSession' in navigator){navigator.mediaSession.metadata=new MediaMetadata({title:'Illuminate, out loud',artist:'Vanderbilt People, Culture and Belonging',album:'November 2026',artwork:[{src:'img/cover-art-v2.jpg',sizes:'512x512',type:'image/jpeg'}]});
     navigator.mediaSession.setActionHandler('seekbackward',()=>au.currentTime-=15);navigator.mediaSession.setActionHandler('seekforward',()=>au.currentTime+=15)}
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pod.classList.contains('open')&&!$('#grid').classList.contains('open'))closePod()});
 })();
