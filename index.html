@@ -777,6 +777,7 @@ function splitWords(el){
   const out=[];
   [...el.childNodes].forEach(n=>{
     if(n.nodeType===3){n.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){out.push(document.createTextNode(t));return}const w=document.createElement('span');w.className='w mo';w.textContent=t;out.push(w)})}
+    else if(n.nodeName==='CITE'){out.push(n.cloneNode(true))}
     else{const w=document.createElement('span');w.className='w mo';w.append(n.cloneNode(true));out.push(w)}
   });
   el.textContent='';out.forEach(o=>el.append(o));
@@ -807,6 +808,10 @@ function countUp(pg){
 }
 function arm(sp){if(RM())return;$$('.pg',sp).forEach(p=>{p.classList.remove('play');p.classList.add('pending')})}
 function fire(sp){$$('.pg',sp).forEach(p=>{p.classList.remove('pending');void p.offsetWidth;p.classList.add('play')});countUp(sp)}
+// before a turn: zero any not-yet-counted stats so the turning page and the landed page match
+function prepCount(sp){if(RM())return;$$('.stat .v',sp).forEach(v=>{if(v.dataset.done)return;const raw=v.dataset.raw||(v.dataset.raw=v.textContent);const m=raw.match(/^([^\d]*)([\d,.]+)(.*)$/);if(!m)return;const dec=(m[2].split('.')[1]||'').length;v.textContent=m[1]+(0).toFixed(dec)+m[3]})}
+function landed(sp){$$('.stat .v',sp).forEach(v=>{if(!v.dataset.counted){v.dataset.counted=1}});countUpOnce(sp)}
+function countUpOnce(sp){const vs=$$('.stat .v',sp).filter(v=>!v.dataset.done);if(!vs.length)return;vs.forEach(v=>v.dataset.done=1);countUp(sp)}
 function modeFor(i){document.body.dataset.mode=i===0?'cover':i===N-1?'back':'inside'}
 // watercolor leaves drifting through the autumn light
 (function(){const c=$('#leaves');if(!c||RM())return;const x=c.getContext('2d');let W,H,dpr;
@@ -852,15 +857,15 @@ function stripIds(n){n.removeAttribute('id');$$('[id]',n).forEach(x=>x.removeAtt
 function face(cls,pg,still){const f=document.createElement('div');f.className='face '+cls;const c=stripIds(pg.cloneNode(true));c.style.overflow='hidden';
   if(still){c.classList.remove('play','pending');c.classList.add('still');const oi=$$('img',pg),ci=$$('img',c);oi.forEach((im,k)=>{if(ci[k])ci[k].style.transform=getComputedStyle(im).transform})}
   f.append(c);const sh=document.createElement('div');sh.className='shade';f.append(sh);return f}
-let queued=null;
+let target=0;
 function go(to){
   if(to<0||to>=N)return;
-  if(busy){queued=to;return}
-  if(to===cur)return;
+  target=to;
+  if(busy||to===cur)return;
   const A=S[cur],B=S[to],dir=to>cur?1:-1;
-  const done=()=>{A.classList.remove('turning');A.style.zIndex='';B.style.zIndex='';$$('.pg',A).forEach(p=>p.style.visibility='');cur=to;setState(to);fire(B);busy=false;if(queued!==null){const q=queued;queued=null;setTimeout(()=>go(q),40)}};
+  const done=()=>{A.classList.remove('turning');A.style.zIndex='';B.style.zIndex='';$$('.pg',A).forEach(p=>p.style.visibility='');cur=to;setState(to);landed(B);busy=false;if(target!==cur){const t=target;go(t>cur?cur+1:cur-1);target=t}};
   if(reduce.matches){cur=to;setState(to);modeFor(to);return}
-  busy=true;arm(B);modeFor(to);
+  busy=true;prepCount(B);modeFor(to);
   B.classList.add('on');B.style.zIndex=1;A.style.zIndex=2;
   const solo=A.classList.contains('solo')||B.classList.contains('solo')||narrow.matches;
   if(solo){
@@ -878,16 +883,21 @@ function go(to){
   Object.assign(leaf.style,{top:(r.top-br.top)+'px',height:r.height+'px',width:half+'px',left:(r.left-br.left+(dir>0?half:0))+'px',transformOrigin:dir>0?'left center':'right center'});
   const f1=face('f-front',pa,true),f2=face('f-back',pb,false);leaf.append(f1,f2);book.append(leaf);
   A.classList.add('turning');pa.style.visibility='hidden';
-  const ang=dir>0?-180:180,T=760,ease='cubic-bezier(.45,.05,.25,1)';
-  const anim=leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+ang+'deg)'}],{duration:T,easing:ease,fill:'forwards'});
-  $('.shade',f1).style.background='linear-gradient('+(dir>0?'90deg':'270deg')+',rgba(0,0,0,.35),rgba(0,0,0,0) 70%)';
-  $('.shade',f2).style.background='linear-gradient('+(dir>0?'270deg':'90deg')+',rgba(0,0,0,.35),rgba(0,0,0,0) 70%)';
-  $('.shade',f1).animate([{opacity:0},{opacity:1}],{duration:T/2,easing:'ease-in',fill:'forwards'});
-  $('.shade',f2).animate([{opacity:1},{opacity:0}],{duration:T/2,delay:T/2,easing:'ease-out',fill:'forwards'});
-  // the page underneath darkens slightly as the leaf passes over it
-  anim.onfinish=()=>{done();requestAnimationFrame(()=>leaf.remove())};
+  const sg=dir>0?-1:1,T1=380,T2=400;
+  f2.style.visibility='hidden';
+  const sh1=$('.shade',f1),sh2=$('.shade',f2);
+  sh1.style.background='linear-gradient('+(dir>0?'90deg':'270deg')+',rgba(0,0,0,.38),rgba(0,0,0,0) 75%)';
+  sh2.style.background='linear-gradient('+(dir>0?'270deg':'90deg')+',rgba(0,0,0,.38),rgba(0,0,0,0) 75%)';
+  sh1.animate([{opacity:0},{opacity:1}],{duration:T1,easing:'ease-in',fill:'forwards'});
+  const a1=leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY('+(sg*90)+'deg)'}],{duration:T1,easing:'cubic-bezier(.5,0,.75,.4)',fill:'forwards'});
+  a1.onfinish=()=>{
+    f1.style.visibility='hidden';f2.style.visibility='visible';
+    sh2.style.opacity=1;sh2.animate([{opacity:1},{opacity:0}],{duration:T2,easing:'ease-out',fill:'forwards'});
+    const a2=leaf.animate([{transform:'rotateY('+(sg*90)+'deg)'},{transform:'rotateY('+(sg*180)+'deg)'}],{duration:T2,easing:'cubic-bezier(.25,.6,.35,1)',fill:'forwards'});
+    a2.onfinish=()=>{done();requestAnimationFrame(()=>leaf.remove())};
+  };
 }
-const next=()=>go((busy&&queued!==null?queued:cur)+1),prev=()=>go((busy&&queued!==null?queued:cur)-1);
+const next=()=>go(Math.min(N-1,(busy?target:cur)+1)),prev=()=>go(Math.max(0,(busy?target:cur)-1));
 $('#next').onclick=next;$('#prev').onclick=prev;
 document.addEventListener('click',e=>{
   const g=e.target.closest('[data-go]');if(g){e.preventDefault();closeGrid();const i=S.findIndex(s=>s.id===g.dataset.go);if(i>-1)go(i);return}
@@ -933,7 +943,7 @@ $('#grid').addEventListener('keydown',e=>{if(e.key!=='Tab')return;const f=$$('bu
 // deep links
 function fromHash(){const id=location.hash.slice(1),i=S.findIndex(s=>s.id===id);return i>-1?i:0}
 addEventListener('hashchange',()=>{const i=fromHash();if(i!==cur)go(i)});
-cur=fromHash();setState(cur);modeFor(cur);if(cur===0&&!RM()){document.body.classList.add('intro');setTimeout(()=>document.body.classList.remove('intro'),3600)}else{arm(S[cur]);requestAnimationFrame(()=>fire(S[cur]))}
+cur=fromHash();target=cur;setState(cur);modeFor(cur);if(cur===0&&!RM()){document.body.classList.add('intro');setTimeout(()=>document.body.classList.remove('intro'),3600)}else{arm(S[cur]);$$('.stat .v',S[cur]).forEach(v=>{v.dataset.done=1;v.dataset.counted=1});requestAnimationFrame(()=>fire(S[cur]))}
 }
 </script>
 </body>
