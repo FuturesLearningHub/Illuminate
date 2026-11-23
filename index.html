@@ -241,11 +241,15 @@ h1 em,h2 em,h3 em{font-family:var(--serif);font-style:italic;color:var(--oak)}
 :root{--ease-out:cubic-bezier(.22,1,.36,1)}
 /* ambient golden sky behind the book */
 .ambient{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.ambient video,.ambient img{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
-.ambient video.ready{opacity:1}
-.ambient img{opacity:1}
+.ambient .wash{position:absolute;inset:-6%;width:112%;height:112%;max-width:none;object-fit:cover;animation:washDrift 40s ease-in-out infinite alternate}
+@keyframes washDrift{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.08) translate3d(-2%,1.5%,0)}}
+#leaves{position:absolute;inset:0;width:100%;height:100%;z-index:2;transition:opacity 1.1s}
+body[data-mode="inside"] #leaves{opacity:.45}
+.rays{position:absolute;inset:-20%;z-index:1;pointer-events:none;background:conic-gradient(from 200deg at 18% -10%,rgba(255,226,160,0) 0deg,rgba(255,226,160,.14) 12deg,rgba(255,226,160,0) 24deg,rgba(255,226,160,.1) 40deg,rgba(255,226,160,0) 54deg);mix-blend-mode:screen;animation:rays 14s ease-in-out infinite alternate}
+@keyframes rays{from{opacity:.55;transform:rotate(-2deg)}to{opacity:1;transform:rotate(3deg)}}
+.veil{z-index:3}
 .veil{position:absolute;inset:0;transition:background 1.1s var(--ease-out)}
-body[data-mode="cover"] .veil{background:radial-gradient(70% 70% at 50% 45%,rgba(12,10,8,.08),rgba(12,10,8,.62))}
+body[data-mode="cover"] .veil{background:radial-gradient(70% 70% at 50% 45%,rgba(12,10,8,.15),rgba(12,10,8,.7))}
 body[data-mode="inside"] .veil{background:radial-gradient(90% 80% at 50% 45%,rgba(14,12,10,.78),rgba(10,9,8,.94))}
 body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(12,10,8,.25),rgba(12,10,8,.7))}
 .book,.top,.foot,.arrow{z-index:5}
@@ -321,7 +325,8 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
   .foot .rail{padding:0 .6rem}
 }
 @media (prefers-reduced-motion:reduce){
-  .ambient video{display:none}
+  .ambient .wash,.rays{animation:none}
+  #leaves{display:none}
   .pg.pending .mo,.pg.pending .ph{opacity:1}
   .pg.play .mo,.pg.play .ph,.pg.bleed.play>img:first-child,.mag-art,.sheen::after,.intro .mag,.mag-head .ch,.intro .mag-side .ml,.intro .mag-line>*,.intro .mag-seal,.open-pill,.open-pill i{animation:none!important;opacity:1;filter:none;transform:none}
 }
@@ -353,7 +358,7 @@ body[data-mode="back"] .veil{background:radial-gradient(70% 70% at 50% 50%,rgba(
 </head>
 <body>
 <a class="skip" href="#book">Skip to the issue</a>
-<div class="ambient" aria-hidden="true"><img src="media/golden-clouds.jpg" alt=""><video id="amb" muted playsinline preload="auto" poster="media/golden-clouds.jpg"></video><div class="veil"></div></div>
+<div class="ambient" aria-hidden="true"><img class="wash" src="media/autumn-wash.jpg" alt=""><canvas id="leaves"></canvas><div class="rays"></div><div class="veil"></div></div>
 
 <header class="top">
   <a class="brand chip glass" href="#cover" data-go="cover" aria-label="Illuminate, back to the cover">
@@ -803,13 +808,25 @@ function countUp(pg){
 function arm(sp){if(RM())return;$$('.pg',sp).forEach(p=>{p.classList.remove('play');p.classList.add('pending')})}
 function fire(sp){$$('.pg',sp).forEach(p=>{p.classList.remove('pending');void p.offsetWidth;p.classList.add('play')});countUp(sp)}
 function modeFor(i){document.body.dataset.mode=i===0?'cover':i===N-1?'back':'inside'}
-// ambient video with soft loop crossfade
-(function(){const v=$('#amb');if(!v||RM())return;v.src='media/golden-clouds.mp4';
-  const fadeTo=(o,ms)=>{v.style.transition='opacity '+ms+'ms ease';v.style.opacity=o};
-  v.addEventListener('loadeddata',()=>{v.classList.add('ready');v.play().catch(()=>{})});
-  v.addEventListener('timeupdate',()=>{if(v.duration&&v.duration-v.currentTime<.6)fadeTo(.35,550)});
-  v.addEventListener('ended',()=>{v.currentTime=0;v.play().catch(()=>{});fadeTo(1,600)});
-  v.play().catch(()=>{});
+// watercolor leaves drifting through the autumn light
+(function(){const c=$('#leaves');if(!c||RM())return;const x=c.getContext('2d');let W,H,dpr;
+  const COL=['#CFAE70','#946E24','#C8742F','#B5532A','#E0B04A','#8A3B22','#D99A3C'];
+  function size(){dpr=Math.min(2,devicePixelRatio||1);W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  size();addEventListener('resize',size);
+  const n=()=>Math.round(Math.min(26,Math.max(10,W/60)));
+  const mk=(top)=>({x:Math.random()*W,y:top?-40-Math.random()*H*.3:Math.random()*H,s:9+Math.random()*16,r:Math.random()*6.3,vr:(Math.random()-.5)*.02,vy:.25+Math.random()*.55,ph:Math.random()*6.3,amp:.4+Math.random()*1.1,c:COL[Math.random()*COL.length|0],a:.35+Math.random()*.45,z:.6+Math.random()*.8});
+  let L=Array.from({length:n()},()=>mk(false));
+  function leaf(p){x.save();x.translate(p.x,p.y);x.rotate(p.r);x.scale(1,.55+.45*Math.cos(p.ph*1.3));x.globalAlpha=p.a;
+    const g=x.createRadialGradient(-p.s*.2,-p.s*.1,p.s*.1,0,0,p.s);g.addColorStop(0,p.c);g.addColorStop(1,p.c+'00');
+    x.fillStyle=g;x.beginPath();x.moveTo(0,-p.s);x.bezierCurveTo(p.s*.85,-p.s*.6,p.s*.75,p.s*.55,0,p.s);x.bezierCurveTo(-p.s*.75,p.s*.55,-p.s*.85,-p.s*.6,0,-p.s);x.fill();
+    x.globalAlpha=p.a*.5;x.strokeStyle=p.c;x.lineWidth=.8;x.beginPath();x.moveTo(0,-p.s*.9);x.lineTo(0,p.s*1.15);x.stroke();x.restore()}
+  let last=performance.now(),run=true;
+  document.addEventListener('visibilitychange',()=>{run=!document.hidden;if(run){last=performance.now();requestAnimationFrame(tick)}});
+  function tick(t){if(!run)return;const dt=Math.min(50,t-last)/16.7;last=t;x.clearRect(0,0,W,H);
+    while(L.length<n())L.push(mk(true));
+    L.forEach((p,i)=>{p.ph+=.012*dt;p.y+=p.vy*p.z*dt;p.x+=Math.sin(p.ph)*p.amp*dt*.6+.15*dt;p.r+=p.vr*dt;if(p.y>H+40||p.x>W+40)L[i]=mk(true);leaf(p)});
+    requestAnimationFrame(tick)}
+  requestAnimationFrame(tick);
 })();
 // cover tilt and glint follow the pointer
 (function(){const m=$('.mag');if(!m)return;const fine=matchMedia('(pointer:fine)');
