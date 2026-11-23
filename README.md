@@ -19,6 +19,16 @@ The issue reads as one continuous magazine of 16 spreads. On desktop the right p
 - Every spread has a deep link by its id: `#cover`, `#contents`, `#cover-story`, `#staff-stories`, `#fall-assembly`, `#veterans`, `#leadership-redefined`, `#gratitude`, `#acorn`, `#around-campus`, `#holiday`, `#back-cover`.
 - Running heads and page numbers are added by script from each page's `data-run`. The contents page numbers come from the same count.
 
+## Motion
+
+Built from two MotionSites designs (Golden Portal and Digital Experiences), adapted to the FLH brand.
+
+- An ambient loop of golden clouds and doves (`media/golden-clouds.mp4`, 280 KB) sits behind the book. It shows full strength on the cover and back cover and dims behind the interior spreads.
+- The cover opens with a blur-in masthead, staggered cover lines and a spinning-in seal. It tilts toward the pointer, the art drifts slowly, and a gold sheen crosses it.
+- After each page turn lands, the type develops in: headlines word by word with a blur, then kickers, deks and body. Photos settle from a slight zoom. Full-bleed photos drift slowly. Statistics count up.
+- The top bar, buttons, arrows and scrubber use a gold-edged liquid-glass treatment.
+- Everything stops under the reduced-motion setting, and the video is replaced by its still frame.
+
 ## Run it locally
 
 ```
