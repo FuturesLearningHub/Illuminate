@@ -12,7 +12,12 @@ One static page. No framework, no build step, no backend.
 - `img/` holds the issue photos and the watercolor cover art.
 - `assets/` holds the FLH brand fonts (Libre Caslon, Inter, Antonio), the VU lockup and the favicon.
 
-Stories open as their own view by hash: `#story-tina-soo`, `#story-leaders40`, and so on. Sections are plain anchors: `#people`, `#leadership`, `#wellbeing`, `#campus`.
+The issue reads as one continuous magazine of 16 spreads. On desktop the right page turns over the spine to the next spread. On phones each page is a screen you scroll, then swipe.
+
+- Turn with the arrow keys, Page Up and Down, the space bar, the scroll wheel, a swipe, or the side arrows.
+- The scrubber along the bottom jumps to any spread. **All pages** opens a thumbnail grid.
+- Every spread has a deep link by its id: `#cover`, `#contents`, `#cover-story`, `#staff-stories`, `#fall-assembly`, `#veterans`, `#leadership-redefined`, `#gratitude`, `#acorn`, `#around-campus`, `#holiday`, `#back-cover`.
+- Running heads and page numbers are added by script from each page's `data-run`. The contents page numbers come from the same count.
 
 ## Run it locally
 
@@ -38,6 +43,7 @@ Built to the FLH house style from the vu-course-builder skill:
 ## Making a new issue
 
 1. Swap the cover art in `img/` and the cover text in the `.cover` section.
-2. Replace each `<article class="story">` with the new stories. Keep the `id="s-<slug>"` pattern and add the slug to `ORDER` in the script.
-3. Update the `E` events array for Around Campus.
-4. Update the volume and month in the top bar, the masthead strip and the footer.
+2. Each spread is a `<section class="spread">` with two `.pg` pages (`left` and `right`). A full-bleed photo page is `.pg.bleed`. Give text pages a `data-run` for the running head.
+3. Fit each page to one screen at 1440x900. Split long stories across spreads (see Staff Stories). Pages scroll internally on smaller screens as a fallback.
+4. Update the `TOC` array for the contents page and the `E` array for Around Campus.
+5. Update the volume and month in the top bar, the cover strip, the running heads and the back cover.
