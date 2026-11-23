@@ -63,26 +63,34 @@ h1 em,h2 em,h3 em,.dek em{font-family:var(--serif);font-style:italic}
 .menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .8rem;cursor:pointer}
 .progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--vu-gold);width:0;transition:width .1s linear}
 
-/* ---------- cover: watercolor on paper ---------- */
-.cover{--tx:var(--vu-black);--tx2:#3a3a3a;--focus:var(--vu-black);--btn-bg:var(--vu-black);--btn-tx:#fff;--btn-bd:var(--vu-black);
-  position:relative;min-height:calc(100svh - 64px);background:#F7F3EE;color:var(--vu-black);overflow:hidden;isolation:isolate;display:flex;border-bottom:1px solid var(--vu-gold)}
-.cover .art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:-2}
-.cover .copy{width:var(--wrap);margin:0 auto;padding:clamp(1.8rem,4vw,3.5rem) 0 clamp(2rem,4vw,3rem);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem}
-.masthead{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,13vw,12.5rem);line-height:.82;letter-spacing:.02em;color:var(--vu-black);margin:0;mix-blend-mode:multiply}
-.masthead-sub{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:2px solid var(--vu-black);border-bottom:1px solid var(--vu-black);padding:.55rem 0;margin-top:1rem;font-family:var(--cond);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;max-width:44rem;background:rgba(247,243,238,.75)}
-.coverline{max-width:31rem;position:relative}
-.coverline .kicker{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--vu-oak);font-size:.85rem;margin:0 0 .75rem}
-.coverline h2{font-size:clamp(3rem,7vw,6.4rem);line-height:.95}
-.coverline h2 em{color:var(--vu-oak)}
-.coverline p{color:#2b2b2b;font-size:1.15rem;margin:1.1rem 0 1.6rem}
-.coverline .seal{width:96px;border-radius:50%;margin-bottom:1.2rem;box-shadow:0 6px 18px rgba(0,0,0,.18)}
-.cover .btn:hover{background:transparent;color:var(--vu-black)}
-.alsoin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;border-top:1px solid rgba(28,28,28,.35);padding-top:1.1rem;max-width:44rem;background:rgba(247,243,238,.8)}
-.alsoin a{text-decoration:none;display:block}
-.alsoin .n,.alsoin .t{display:block}
-.alsoin .n{font-family:var(--cond);font-weight:700;color:var(--vu-oak);letter-spacing:.1em;font-size:.75rem;text-transform:uppercase}
-.alsoin .t{font-family:var(--display);font-size:1.25rem;line-height:1.15;margin-top:.3rem}
-.alsoin a:hover .t{text-decoration:underline;text-decoration-color:var(--vu-oak);text-underline-offset:4px}
+/* ---------- cover: a printed magazine on a dark desk ---------- */
+.stage{padding:clamp(2rem,5vw,4rem) 0;background:radial-gradient(120% 90% at 30% 40%,#2a2a2a 0%,#1C1C1C 55%,#121212 100%);border-bottom:1px solid rgba(207,174,112,.25)}
+.stage-grid{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.mag{position:relative;display:block;aspect-ratio:8.5/11;height:min(calc(100svh - 64px - 7rem),900px);min-height:520px;container-type:inline-size;overflow:hidden;color:var(--vu-black);text-decoration:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.08),0 30px 60px -20px rgba(0,0,0,.8),0 18px 30px -18px rgba(0,0,0,.7);transform:rotate(-1.2deg);transition:transform .35s ease,box-shadow .35s ease}
+.mag:hover{transform:rotate(0) translateY(-4px);box-shadow:0 1px 0 rgba(255,255,255,.08),0 40px 80px -20px rgba(0,0,0,.85)}
+.mag::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 18%,rgba(0,0,0,0) 80%,rgba(0,0,0,.12) 100%)}
+.mag-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mag-frame{position:absolute;inset:2.4cqw;border:.5cqw solid var(--vu-gold);pointer-events:none}
+.mag-top{position:absolute;left:5cqw;right:5cqw;top:4.6cqw;display:block}
+.mag-strip{display:flex;justify-content:space-between;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:2.4cqw;color:var(--vu-black);padding-bottom:1cqw;border-bottom:.35cqw solid var(--vu-black)}
+.mag-head{display:block;font-family:var(--display);font-size:14.6cqw;line-height:.9;letter-spacing:-.015em;margin-top:1.4cqw;color:var(--vu-black);text-align:center;mix-blend-mode:multiply}
+.mag-side{position:absolute;left:3.6cqw;top:32cqw;display:grid;gap:3cqw;width:42cqw;padding:2.4cqw 3cqw 3cqw 2.4cqw;background:linear-gradient(90deg,rgba(247,243,238,.9) 0%,rgba(247,243,238,.78) 60%,rgba(247,243,238,0) 100%)}
+.ml{display:block;font-family:var(--display);font-size:4.2cqw;line-height:1.06;color:var(--vu-black)}
+.ml .k{display:block;font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:2.3cqw;color:var(--vu-black);margin-bottom:.6cqw;border-top:.35cqw solid var(--vu-black);padding-top:.8cqw;width:max-content}
+.mag-line .k{display:block;font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:2.3cqw;color:var(--vu-gold);margin-bottom:.6cqw}
+.mag-line{position:absolute;left:0;right:0;bottom:0;padding:22cqw 6cqw 7cqw;background:linear-gradient(0deg,rgba(20,20,20,.88) 0%,rgba(20,20,20,.55) 55%,rgba(20,20,20,0) 100%);color:#fff;display:block}
+.mag-line .h{display:block;font-family:var(--display);font-size:15cqw;line-height:.9}
+.mag-line .h em{font-family:var(--serif);font-style:italic;color:var(--vu-gold)}
+.mag-line .d{display:block;font-family:var(--serif);font-size:3.8cqw;line-height:1.25;margin-top:2cqw;max-width:70cqw}
+.mag-seal{position:absolute;right:6cqw;top:-8cqw;width:20cqw;border-radius:50%;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.inside-h{font-size:clamp(2.4rem,4.5vw,3.8rem);margin-bottom:1.6rem}
+.toc{list-style:none;margin:0 0 2rem;padding:0;border-top:1px solid rgba(207,174,112,.35)}
+.toc a{display:grid;grid-template-columns:3.2rem 1fr;gap:1rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.12);text-decoration:none}
+.toc .pg{font-family:var(--display);font-size:1.6rem;color:var(--vu-gold)}
+.toc .sec{display:block;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:rgba(255,255,255,.7)}
+.toc .tt{display:block;font-family:var(--display);font-size:1.25rem;line-height:1.15}
+.toc a:hover .tt{text-decoration:underline;text-decoration-color:var(--vu-gold);text-underline-offset:4px}
 
 /* ---------- home sections ---------- */
 section.band{padding:clamp(3.5rem,8vw,6.5rem) 0}
@@ -242,11 +250,10 @@ body.reading #home{display:none}
   .top nav.open{display:block;position:absolute;top:64px;left:0;right:0;background:#141414;border-bottom:1px solid rgba(207,174,112,.3);padding:1rem 4vw}
   .top nav.open ul{flex-direction:column;gap:.4rem}
   .menu-btn{display:inline-block}
-  .cover{flex-direction:column;min-height:auto}
-  .cover::before{display:none}
-  .cover .art{position:relative;width:100%;height:46svh;object-position:88% center;order:-1}
-  .cover .copy{padding-top:1.5rem}
-  .masthead{mix-blend-mode:normal}
+  .stage-grid{grid-template-columns:1fr;justify-items:center}
+  .mag{height:auto;width:min(100%,560px);min-height:0;transform:none}
+  .mag:hover{transform:none}
+  .inside{width:min(100%,560px)}
 }
 @media (max-width:1000px){
   .top nav.open{display:block;position:absolute;top:64px;left:0;right:0;background:#141414;border-bottom:1px solid rgba(207,174,112,.3);padding:1rem 4vw}
@@ -280,6 +287,7 @@ body.reading #home{display:none}
   .sec-head .meta{text-align:left}
 }
 @media (prefers-reduced-motion:reduce){
+  .mag{transform:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition:none!important;animation:none!important}
 }
@@ -315,25 +323,42 @@ body.reading #home{display:none}
 <!-- =================== HOME =================== -->
 <div id="home">
 
-  <section class="cover" aria-labelledby="cover-h">
-    <img class="art" src="img/cover-campus-wc.jpg" alt="Watercolor of the Vanderbilt University footbridge under orange and gold autumn leaves.">
-    <div class="copy">
-      <div>
-        <p class="masthead" aria-label="Illuminate">ILLUMINATE</p>
-        <div class="masthead-sub"><span>The Magazine for Vanderbilt Staff</span><span>Vol 3.11 · November 2026</span></div>
+  <section class="stage dark" aria-labelledby="cover-h">
+    <div class="wrap stage-grid">
+      <a class="mag" href="#story-leaders40" aria-label="Open the cover story: One of forty.">
+        <img class="mag-art" src="img/cover-art.jpg" alt="Watercolor of the Vanderbilt University footbridge under orange and gold autumn leaves.">
+        <span class="mag-frame" aria-hidden="true"></span>
+        <span class="mag-top">
+          <span class="mag-strip"><span>The Magazine for Vanderbilt Staff</span><span>Vol 3.11 · November 2026</span></span>
+          <span class="mag-head">ILLUMINATE</span>
+        </span>
+        <span class="mag-side">
+          <span class="ml"><span class="k">Staff Stories</span>Tina Soo on seeing bright futures</span>
+          <span class="ml"><span class="k">Fall Assembly</span>$4.5B and a record year</span>
+          <span class="ml"><span class="k">Gratitude</span>Five small habits</span>
+        </span>
+        <span class="mag-line">
+          <img class="mag-seal" src="img/leaders40.jpg" alt="">
+          <span class="k">Cover Story · Top CHRO 2026</span>
+          <span class="h" id="cover-h">One of <em>forty</em>.</span>
+          <span class="d">Sydney Savion joins the world's top chief human resources officers</span>
+        </span>
+      </a>
+      <div class="inside">
+        <p class="eyebrow">Inside this issue</p>
+        <h2 class="inside-h">November <em>2026</em>.</h2>
+        <ol class="toc">
+          <li><a href="#story-editor"><span class="pg">02</span><span><span class="sec">Editor's Reflection</span><span class="tt">The ones who hold us up</span></span></a></li>
+          <li><a href="#story-tina-soo"><span class="pg">04</span><span><span class="sec">Staff Stories</span><span class="tt">Seeing bright futures</span></span></a></li>
+          <li><a href="#story-veterans"><span class="pg">08</span><span><span class="sec">Veterans Day</span><span class="tt">Honoring those who served</span></span></a></li>
+          <li><a href="#story-leadership-redefined"><span class="pg">10</span><span><span class="sec">Leadership Redefined</span><span class="tt">A fourth cohort convenes</span></span></a></li>
+          <li><a href="#wellbeing"><span class="pg">14</span><span><span class="sec">Wellbeing</span><span class="tt">Make gratitude a habit</span></span></a></li>
+          <li><a href="#story-fall-assembly"><span class="pg">22</span><span><span class="sec">Fall Staff Assembly</span><span class="tt">The staff behind the momentum</span></span></a></li>
+          <li><a href="#story-leaders40"><span class="pg">24</span><span><span class="sec">Cover Story</span><span class="tt">One of forty</span></span></a></li>
+          <li><a href="#campus"><span class="pg">26</span><span><span class="sec">Around Campus</span><span class="tt">Turkey Toss, tours and tickets</span></span></a></li>
+        </ol>
+        <a class="btn" href="#story-editor">Open the issue <span aria-hidden="true">→</span></a>
       </div>
-      <div class="coverline">
-        <img class="seal" src="img/leaders40.jpg" alt="Leaders40, World's Top CHROs 2026 badge.">
-        <p class="kicker">Cover Story · Top CHRO 2026</p>
-        <h2 id="cover-h">One of <em>forty</em>.</h2>
-        <p>Vice Chancellor Sydney Savion is named to the 2026 N2Growth Leaders40, a list of the top chief human resources officers in the world.</p>
-        <a class="btn" href="#story-leaders40">Read the cover story <span aria-hidden="true">→</span></a>
-      </div>
-      <nav class="alsoin" aria-label="Also in this issue">
-        <a href="#story-tina-soo"><span class="n">Staff Stories</span><span class="t">Tina Soo on seeing bright futures</span></a>
-        <a href="#story-fall-assembly"><span class="n">Fall Staff Assembly</span><span class="t">The people behind the momentum</span></a>
-        <a href="#campus"><span class="n">Around Campus</span><span class="t">Turkey Toss, tours and tickets</span></a>
-      </nav>
     </div>
   </section>
 
