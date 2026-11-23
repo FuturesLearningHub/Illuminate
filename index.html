@@ -244,6 +244,56 @@ body.reading #home{display:none}
 .toast{visibility:hidden;position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%) translateY(150%);background:var(--vu-gold);color:var(--vu-black);font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.2rem;z-index:100;transition:transform .3s}
 .toast.show{visibility:visible;transform:translateX(-50%) translateY(0)}
 
+
+/* ---------- print layer: paper, running heads, folios, spreads, columns ---------- */
+:root{--paper:#F7F3EE}
+.paper{--bg:var(--paper);--tx:var(--vu-black);--tx2:#3a3a3a;--eyebrow:var(--vu-oak);--rule:var(--vu-gold);--line:rgba(28,28,28,.16);--focus:var(--vu-black);--btn-bg:var(--vu-black);--btn-tx:#fff;--btn-bd:var(--vu-black);--accent:var(--vu-oak);background:var(--paper);color:var(--vu-black)}
+.runhead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;border-bottom:1px solid currentColor;padding-bottom:.55rem;margin-bottom:2.4rem;column-span:all}
+.runhead b{font-family:var(--display);font-weight:400;letter-spacing:.18em;font-size:.9rem}
+.folio{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;border-top:1px solid currentColor;padding-top:.6rem;margin-top:3rem;column-span:all}
+.folio .n{font-family:var(--display);font-weight:400;font-size:1.5rem;letter-spacing:0}
+section.band>.wrap>.runhead,section.band>.wrap>.folio{opacity:.85;grid-column:1/-1}
+
+/* home pages sit on the desk like separate sheets */
+#home{background:radial-gradient(120% 60% at 50% 0%,#262626 0%,#161616 70%)}
+#home>section.band[data-folio]{width:min(1320px,96vw);margin:0 auto 1.6rem;box-shadow:0 24px 50px -24px rgba(0,0,0,.8),0 2px 0 rgba(255,255,255,.04)}
+#home>section.band.dark[data-folio]{border:1px solid rgba(207,174,112,.18)}
+#home>.stage{margin-bottom:1.6rem}
+/* story = a printed spread */
+.story,.story.light{--bg:var(--paper);background:var(--paper)}
+.story .a-hero,.story .a-split{--tx:var(--vu-black);--tx2:#3a3a3a;--eyebrow:var(--vu-oak);--rule:var(--vu-gold);--focus:var(--vu-black);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:calc(100svh - 64px);background:var(--paper);color:var(--vu-black);align-items:stretch;border-bottom:1px solid rgba(28,28,28,.2)}
+.story .a-hero::before{display:none}
+.story .a-hero>img{position:relative;inset:auto;z-index:auto;width:100%;height:100%;object-fit:cover;grid-column:1;grid-row:1}
+.story .a-hero .wrap,.story .a-split .txt{width:auto;margin:0;padding:clamp(2rem,5vw,4.5rem);display:flex;flex-direction:column;justify-content:center;grid-row:1;position:relative}
+.story .a-hero .wrap{grid-column:2}
+.story .a-hero .wrap::after,.story .a-split .txt::after{content:"";position:absolute;top:0;bottom:0;width:28px;pointer-events:none}
+.story .a-hero .wrap::after{left:0;background:linear-gradient(90deg,rgba(0,0,0,.09),rgba(0,0,0,0))}
+.story h1{font-size:clamp(3rem,6vw,5.6rem);max-width:12ch;line-height:.95}
+.story .a-hero h1 em,.story .a-split h1 em{color:var(--vu-oak)}
+.story .dek{color:#2b2b2b}
+.story .byline{border-top:1px solid rgba(28,28,28,.3);padding-top:.9rem}
+.story .byline .meta{color:#3a3a3a}
+
+.story .body{width:min(1120px,92vw);columns:2;column-gap:3.2rem;column-rule:1px solid rgba(28,28,28,.14);font-family:var(--serif);font-size:1.08rem;line-height:1.7;text-align:justify;hyphens:auto;-webkit-hyphens:auto;padding-top:3rem}
+.story .body>p{margin:0 0 1.05rem;orphans:3;widows:3}
+.story .body>p.drop::first-letter{font-size:5.2rem;padding:.4rem .7rem 0 0;color:var(--vu-oak)}
+.story .body .q{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.95rem;line-height:1.35;text-align:left;border-top:0;padding-top:0;margin:1.6rem 0 .45rem;break-after:avoid;color:var(--vu-black)}
+.story .body h2{column-span:all;text-align:left;margin:2.6rem 0 1.2rem;font-size:clamp(1.9rem,3vw,2.6rem)}
+.story .body blockquote,.story .body figure.wide,.story .body .factbox,.story .body .sig,.story .body .end{column-span:all;margin-left:0;margin-right:0;text-align:center}
+.story .body figure{break-inside:avoid;text-align:left}
+.story .body figure.wide{text-align:left}
+.story .body .factbox{text-align:left;background:#fff;border-top:3px solid var(--vu-black)}
+.story .body .sig{text-align:left}
+.story .body p a.btn{text-align:left}
+@media (max-width:1000px){
+  .story .a-hero,.story .a-split{grid-template-columns:1fr;min-height:0}
+  .story .a-hero>img,.story .a-split figure{height:52svh;position:relative}
+  .story .a-hero .wrap,.story .a-split .txt{grid-column:1!important;grid-row:2}
+  .story .a-hero .wrap::after{display:none}
+  .story .body{columns:1;text-align:left}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:1180px){
   .top nav{display:none}
@@ -286,6 +336,7 @@ body.reading #home{display:none}
   .sec-head{flex-direction:column;align-items:start}
   .sec-head .meta{text-align:left}
 }
+@media (max-width:640px){.runhead span:last-child{display:none}.runhead{font-size:.66rem}.folio span:last-child{display:none}}
 @media (prefers-reduced-motion:reduce){
   .mag{transform:none}
   html{scroll-behavior:auto}
@@ -362,9 +413,22 @@ body.reading #home{display:none}
     </div>
   </section>
 
-  <section class="band light" id="people" aria-labelledby="people-h">
+  <section class="band paper" data-run="Editor's Reflection" data-folio="02" aria-labelledby="ed-h">
+    <div class="wrap editor">
+      <figure><img src="img/bridge.jpg" alt="A campus footbridge framed by orange autumn leaves."></figure>
+      <div>
+        <p class="eyebrow">Editor's Reflection</p>
+        <h2 id="ed-h" class="sr">Editor's Reflection</h2>
+        <blockquote>“Gratitude is something we <em>practice</em>, not only something we say.”</blockquote>
+        <div class="sig"><div><div class="name">Sydney Savion</div><div class="role">Vice Chancellor for People, Culture and Belonging</div></div></div>
+        <a class="btn" href="#story-editor">Read the letter <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band paper" id="people" data-run="In Brief" data-folio="04" aria-labelledby="people-h">
     <div class="wrap">
-      <div class="sec-head"><h2 id="people-h">This <em>month</em>.</h2><span class="meta">People, stories and moments from across Vanderbilt</span></div>
+      <div class="sec-head"><h2 id="people-h">In <em>brief</em>.</h2><span class="meta">People, stories and moments from across Vanderbilt</span></div>
       <div class="lead-grid">
         <a class="card big" href="#story-tina-soo">
           <div class="ph"><img src="img/tina-alumna.jpg" alt="Tina Soo embraces a visiting alumna."></div>
@@ -391,20 +455,8 @@ body.reading #home{display:none}
     </div>
   </section>
 
-  <section class="band cream" aria-labelledby="ed-h">
-    <div class="wrap editor">
-      <figure><img src="img/bridge.jpg" alt="A campus footbridge framed by orange autumn leaves."></figure>
-      <div>
-        <p class="eyebrow">Editor's Reflection</p>
-        <h2 id="ed-h" class="sr">Editor's Reflection</h2>
-        <blockquote>“Gratitude is something we <em>practice</em>, not only something we say.”</blockquote>
-        <div class="sig"><div><div class="name">Sydney Savion</div><div class="role">Vice Chancellor for People, Culture and Belonging</div></div></div>
-        <a class="btn" href="#story-editor">Read the letter <span aria-hidden="true">→</span></a>
-      </div>
-    </div>
-  </section>
 
-  <section class="band dark" id="leadership" aria-labelledby="mom-h">
+  <section class="band dark" id="leadership" data-run="Fall Staff Assembly" data-folio="22" aria-labelledby="mom-h">
     <div class="wrap">
       <p class="eyebrow">Sixth Annual Fall Staff Assembly · By the numbers</p>
       <h2 id="mom-h" style="font-size:clamp(2.4rem,5vw,4.2rem);max-width:18ch;margin-bottom:2.5rem">A year of record <em>demand</em>.</h2>
@@ -431,7 +483,7 @@ body.reading #home{display:none}
     </div>
   </section>
 
-  <section class="band cream" id="wellbeing" aria-labelledby="grat-h">
+  <section class="band paper" id="wellbeing" data-run="Health, Wellbeing &amp; Belonging" data-folio="14" aria-labelledby="grat-h">
     <div class="wrap">
       <div class="grat-intro">
         <div>
@@ -453,7 +505,7 @@ body.reading #home{display:none}
     </div>
   </section>
 
-  <section class="band dark" id="campus" aria-labelledby="cal-h">
+  <section class="band dark" id="campus" data-run="Around Campus" data-folio="26" aria-labelledby="cal-h">
     <div class="wrap">
       <div class="sec-head" style="border-color:var(--vu-gold)"><h2 id="cal-h">Around <em>campus</em>.</h2><span class="meta">Events and updates · Times are Central</span></div>
       <div class="filters" role="group" aria-label="Filter events">
@@ -487,7 +539,7 @@ body.reading #home{display:none}
     </div>
   </section>
 
-  <section class="band light" aria-label="More from this issue">
+  <section class="band paper" data-run="Stay Connected" data-folio="30" aria-label="More from this issue">
     <div class="wrap mini">
       <div class="box">
         <p class="eyebrow">Health, Wellbeing &amp; Belonging</p>
@@ -746,6 +798,14 @@ body.reading #home{display:none}
 
   // router
   var stories=$$('.story'),nextNav=$('#next'),bar=$('.progress');
+
+  // print layer: running heads and folios
+  var FOLIO={'editor':'02','tina-soo':'04','veterans':'08','leadership-redefined':'10','acorn':'18','anchors-edge':'20','fall-assembly':'22','leaders40':'24'};
+  function rh(left){var d=document.createElement('div');d.className='runhead';d.setAttribute('aria-hidden','true');d.innerHTML='<b>ILLUMINATE</b><span>'+left+'</span><span>November 2026</span>';return d}
+  function fo(n,label){var d=document.createElement('div');d.className='folio';d.setAttribute('aria-hidden','true');d.innerHTML='<span class="n">'+n+'</span><span>'+label+'</span><span>Vanderbilt People, Culture and Belonging</span>';return d}
+  stories.forEach(function(st){var id=st.id.slice(2),b=$('.body',st),k=$('.eyebrow',st);if(!b)return;var lab=k?k.textContent.split('·')[0].trim():'';
+    b.insertBefore(rh(lab),b.firstChild);b.appendChild(fo(FOLIO[id]||'',lab))});
+  $$('section.band[data-folio]').forEach(function(sec){var w=$('.wrap',sec);if(!w)return;w.insertBefore(rh(sec.dataset.run),w.firstChild);w.appendChild(fo(sec.dataset.folio,sec.dataset.run))});
   function route(){var h=(location.hash||'').slice(1),m;
     stories.forEach(function(s){s.classList.remove('on')});
     $$('.top nav a').forEach(function(a){a.removeAttribute('aria-current')});
