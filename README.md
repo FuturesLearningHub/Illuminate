@@ -31,7 +31,7 @@ Built from two MotionSites designs (Golden Portal and Digital Experiences), adap
 
 ## Podcast: Illuminate, out loud
 
-**Listen to the issue** in the top bar opens a player for a 4:37 two-host conversation about the issue (`media/illuminate-nov-2026-podcast.mp3`), made with ElevenLabs voices (eleven_v4). While it plays, the magazine turns to the spread the hosts are discussing. A live caption shows each line, and the full transcript is one tap away. Turning a page yourself switches page-following off so the hosts never pull the page away, and the toggle turns it back on. The line timings, speakers, text and spread for each line live in the `LINES` array in the player script.
+**Listen to the issue** in the top bar opens a player for a 4:37 two-host conversation about the issue (`media/illuminate-nov-2026-podcast-v2.mp3`), made with ElevenLabs voices (eleven_v4). While it plays, the magazine turns to the spread the hosts are discussing. A live caption shows each line, and the full transcript is one tap away. Turning a page yourself switches page-following off so the hosts never pull the page away, and the toggle turns it back on. The line timings, speakers, text and spread for each line live in the `LINES` array in the player script.
 
 To make next month's episode: write a conversational script (reactions and back-and-forth, facts only from the issue), generate one line per call alternating the two voices, trim silence, level loudness, and stitch with short gaps. Then update `LINES` with the new start times.
 
