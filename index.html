@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illuminate · The Magazine for Vanderbilt Staff · November 2026</title>
+<meta name="description" content="Illuminate, the magazine for Vanderbilt staff. Vol 3.11, November 2026.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Libre Caslon Display";src:url(assets/libre-caslon-display-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url(assets/libre-caslon-text-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Libre Caslon Text";src:url(assets/libre-caslon-text-latin-400-italic.woff2) format("woff2");font-style:italic;font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(assets/inter-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(assets/inter-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url(assets/inter-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Antonio;src:url(assets/antonio-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --vu-black:#1C1C1C;--vu-white:#FFFFFF;--vu-gold:#CFAE70;--vu-oak:#946E24;--vu-cream:#F5F3EF;--vu-sand:#E0D5C0;
+  --vu-gray-light:#E4E4E4;--vu-gray-dark:#777777;--vu-sky:#B3C9CD;--vu-sage:#8BA18E;--vu-highlight:#ECB748;
+  --display:"Libre Caslon Display",Georgia,serif;--serif:"Libre Caslon Text",Georgia,serif;
+  --sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--cond:Antonio,"Arial Narrow",sans-serif;
+  --wrap:min(1240px,92vw);--read:min(680px,90vw);
+}
+/* theme scopes: components read these, never raw palette */
+.dark{--bg:var(--vu-black);--tx:#FFFFFF;--tx2:rgba(255,255,255,.78);--eyebrow:var(--vu-gold);--rule:rgba(207,174,112,.35);--line:rgba(255,255,255,.14);--focus:var(--vu-gold);--btn-bg:transparent;--btn-tx:#fff;--btn-bd:var(--vu-gold);--accent:var(--vu-gold);background:var(--bg);color:var(--tx)}
+.light{--bg:#FFFFFF;--tx:var(--vu-black);--tx2:#3d3d3d;--eyebrow:var(--vu-oak);--rule:var(--vu-gold);--line:rgba(28,28,28,.14);--focus:var(--vu-oak);--btn-bg:var(--vu-black);--btn-tx:#fff;--btn-bd:var(--vu-black);--accent:var(--vu-oak);background:var(--bg);color:var(--tx)}
+.cream{--bg:var(--vu-cream);--tx:var(--vu-black);--tx2:#3d3d3d;--eyebrow:var(--vu-black);--rule:var(--vu-gold);--line:rgba(28,28,28,.16);--focus:var(--vu-black);--btn-bg:var(--vu-black);--btn-tx:#fff;--btn-bd:var(--vu-black);--accent:var(--vu-black);background:var(--bg);color:var(--tx)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-size:1.0625rem;line-height:1.6;background:var(--vu-black);color:#fff;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus,var(--vu-gold));outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+.skip{position:absolute;left:-9999px;top:0;z-index:999;background:var(--vu-gold);color:var(--vu-black);padding:.75rem 1rem;font-weight:600}
+.skip:focus{left:1rem;top:1rem}
+.wrap{width:var(--wrap);margin:0 auto}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;color:var(--eyebrow);margin:0 0 .9rem;display:flex;align-items:center;gap:.6rem}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--rule);display:inline-block}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.04;margin:0;letter-spacing:-.01em}
+h1 em,h2 em,h3 em,.dek em{font-family:var(--serif);font-style:italic}
+.dark h1 em,.dark h2 em,.dark h3 em{color:var(--vu-gold)}
+.btn{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.3rem;border:1.5px solid var(--btn-bd);background:var(--btn-bg);color:var(--btn-tx);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.dark .btn:hover{background:rgba(207,174,112,.14)}
+.light .btn:hover,.cream .btn:hover{background:transparent;color:var(--tx)}
+.btn.ghost{background:transparent;color:var(--tx);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.meta{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem;color:var(--tx2)}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:50;background:rgba(20,20,20,.94);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(207,174,112,.25)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:1.5rem}
+.brand{display:flex;align-items:center;gap:1rem;text-decoration:none;color:#fff}
+.brand img{height:30px;width:auto}
+.brand .word{font-family:var(--display);font-size:1.45rem;letter-spacing:.18em;padding-left:1rem;border-left:1px solid rgba(255,255,255,.25)}
+.top nav ul{list-style:none;display:flex;gap:1.6rem;margin:0;padding:0}
+.top nav a{white-space:nowrap;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem;text-decoration:none;color:rgba(255,255,255,.8);padding:.4rem 0;border-bottom:2px solid transparent}
+.top nav a:hover,.top nav a[aria-current="true"]{color:#fff;border-color:var(--vu-gold)}
+.issue-tag{font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.74rem;color:var(--vu-gold);white-space:nowrap}
+.menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .8rem;cursor:pointer}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;background:var(--vu-gold);width:0;transition:width .1s linear}
+
+/* ---------- cover: watercolor on paper ---------- */
+.cover{--tx:var(--vu-black);--tx2:#3a3a3a;--focus:var(--vu-black);--btn-bg:var(--vu-black);--btn-tx:#fff;--btn-bd:var(--vu-black);
+  position:relative;min-height:calc(100svh - 64px);background:#F7F3EE;color:var(--vu-black);overflow:hidden;isolation:isolate;display:flex;border-bottom:1px solid var(--vu-gold)}
+.cover .art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;z-index:-2}
+.cover .copy{width:var(--wrap);margin:0 auto;padding:clamp(1.8rem,4vw,3.5rem) 0 clamp(2rem,4vw,3rem);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem}
+.masthead{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,13vw,12.5rem);line-height:.82;letter-spacing:.02em;color:var(--vu-black);margin:0;mix-blend-mode:multiply}
+.masthead-sub{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:2px solid var(--vu-black);border-bottom:1px solid var(--vu-black);padding:.55rem 0;margin-top:1rem;font-family:var(--cond);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;max-width:44rem;background:rgba(247,243,238,.75)}
+.coverline{max-width:31rem;position:relative}
+.coverline .kicker{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--vu-oak);font-size:.85rem;margin:0 0 .75rem}
+.coverline h2{font-size:clamp(3rem,7vw,6.4rem);line-height:.95}
+.coverline h2 em{color:var(--vu-oak)}
+.coverline p{color:#2b2b2b;font-size:1.15rem;margin:1.1rem 0 1.6rem}
+.coverline .seal{width:96px;border-radius:50%;margin-bottom:1.2rem;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.cover .btn:hover{background:transparent;color:var(--vu-black)}
+.alsoin{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;border-top:1px solid rgba(28,28,28,.35);padding-top:1.1rem;max-width:44rem;background:rgba(247,243,238,.8)}
+.alsoin a{text-decoration:none;display:block}
+.alsoin .n,.alsoin .t{display:block}
+.alsoin .n{font-family:var(--cond);font-weight:700;color:var(--vu-oak);letter-spacing:.1em;font-size:.75rem;text-transform:uppercase}
+.alsoin .t{font-family:var(--display);font-size:1.25rem;line-height:1.15;margin-top:.3rem}
+.alsoin a:hover .t{text-decoration:underline;text-decoration-color:var(--vu-oak);text-underline-offset:4px}
+
+/* ---------- home sections ---------- */
+section.band{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:1.5rem;border-bottom:2px solid var(--tx);padding-bottom:1rem;margin-bottom:2.2rem}
+.sec-head h2{font-size:clamp(2.2rem,4.5vw,3.6rem)}
+.sec-head .meta{text-align:right}
+
+.lead-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(1.5rem,3vw,3rem)}
+.card{display:block;text-decoration:none;color:inherit}
+.card .ph{overflow:hidden;background:#111;aspect-ratio:4/3}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .ph img{transform:scale(1.03)}
+.card .k{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;color:var(--eyebrow);margin:1rem 0 .45rem}
+.card h3{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.08}
+.card p{color:var(--tx2);margin:.6rem 0 0;font-size:1rem}
+.card:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;text-decoration-color:var(--accent)}
+.card.big .ph{aspect-ratio:16/11}
+.card.big h3{font-size:clamp(2.2rem,4vw,3.4rem)}
+.stack{display:grid;gap:2rem;align-content:start}
+.stack .card{display:grid;grid-template-columns:42% 1fr;gap:1.1rem;align-items:start;border-top:1px solid var(--line);padding-top:1.5rem}
+.stack .card:first-child{border-top:0;padding-top:0}
+.stack .card .k{margin-top:0}
+.stack .card .ph{aspect-ratio:1/1}
+.stack .card h3{font-size:1.45rem}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);margin-top:3rem;border-top:1px solid var(--line);padding-top:2.5rem}
+.rt{font-family:var(--cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem;color:var(--tx2);margin-top:.7rem}
+
+/* editor */
+.editor{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.editor figure{margin:0;aspect-ratio:4/5;overflow:hidden}
+.editor figure img{width:100%;height:100%;object-fit:cover}
+.editor blockquote{margin:0;font-family:var(--display);font-size:clamp(1.8rem,3.2vw,2.8rem);line-height:1.15}
+.editor blockquote em{font-family:var(--serif);font-style:italic}
+.sig{display:flex;align-items:center;gap:1rem;margin:1.6rem 0 1.8rem}
+.sig .name{font-family:var(--serif);font-style:italic;font-size:1.6rem}
+.sig .role{font-size:.9rem;color:var(--tx2)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stat{padding:2.2rem 1.5rem;border-left:1px solid var(--rule)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .num{font-family:var(--display);font-size:clamp(3.4rem,7vw,6rem);line-height:1;color:var(--vu-gold)}
+.stat .lab{font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem;margin-top:.7rem}
+.pull{font-family:var(--display);font-size:clamp(1.6rem,2.8vw,2.4rem);line-height:1.2;max-width:58rem;margin:3rem 0 0}
+.pull cite{display:block;font-family:var(--cond);font-style:normal;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;color:var(--vu-gold);margin-top:1.2rem}
+
+/* gratitude */
+.grat-intro{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:2.5rem}
+.flips{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.flip{position:relative;min-height:260px;border:1px solid var(--line);background:#fff;padding:1.3rem;text-align:left;cursor:pointer;font:inherit;color:var(--tx);display:flex;flex-direction:column;justify-content:space-between;gap:1rem;transition:background .3s,border-color .3s}
+.flip:hover{border-color:var(--vu-black)}
+.flip .hab{font-family:var(--cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.9rem}
+.flip .lbl{display:block;margin-bottom:.35rem;font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.7rem;color:#555}
+.flip .txt{font-family:var(--display);font-size:1.35rem;line-height:1.2}
+.flip .hint{font-size:.8rem;color:#555;display:flex;align-items:center;gap:.4rem}
+.flip[aria-pressed="true"]{background:var(--vu-black);color:#fff;border-color:var(--vu-black)}
+.flip[aria-pressed="true"] .lbl,.flip[aria-pressed="true"] .hint{color:var(--vu-gold)}
+.shout{margin-top:2rem;display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:center;background:var(--vu-black);color:#fff;padding:clamp(1.6rem,4vw,2.6rem)}
+.shout h3{font-size:clamp(1.8rem,3vw,2.6rem)}
+.shout h3 em{color:var(--vu-gold)}
+.values{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.pill{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;border:1px solid var(--vu-gold);padding:.35rem .75rem;color:var(--vu-gold)}
+.double{border-left:3px solid var(--vu-gold);padding-left:1rem}
+.double strong{font-family:var(--cond);letter-spacing:.1em;text-transform:uppercase;color:var(--vu-gold);display:block}
+
+/* calendar */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+.chip{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;padding:.55rem 1rem;border:1px solid var(--line);background:transparent;color:var(--tx);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--vu-gold);color:var(--vu-black);border-color:var(--vu-gold)}
+.events{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ev{display:grid;grid-template-columns:110px 1fr auto;gap:1.5rem;padding:1.6rem 0;border-bottom:1px solid var(--line);align-items:start}
+.ev .date{text-align:center;border:1px solid var(--rule);padding:.7rem .4rem}
+.ev .mo{font-family:var(--cond);font-weight:700;letter-spacing:.14em;color:var(--vu-gold);font-size:.8rem;text-transform:uppercase}
+.ev .d{font-family:var(--display);font-size:2.6rem;line-height:1}
+.ev .dw{font-size:.78rem;color:var(--tx2)}
+.ev h3{font-size:1.65rem}
+.ev .where{font-family:var(--cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--vu-gold);margin:.4rem 0 .5rem}
+.ev p{margin:.3rem 0 0;color:var(--tx2);max-width:46rem}
+.ev details{margin-top:.6rem}
+.ev summary{cursor:pointer;font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;color:var(--tx)}
+.ev .acts{display:flex;flex-direction:column;gap:.5rem;align-items:stretch}
+.ev.past{opacity:.55}
+.tag{display:inline-block;font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.66rem;border:1px solid var(--line);padding:.15rem .5rem;margin-left:.5rem;vertical-align:middle;color:var(--tx2)}
+
+/* promos */
+.promos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem)}
+.promo{position:relative;overflow:hidden;min-height:520px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(1.5rem,3vw,2.5rem);color:#fff;isolation:isolate}
+.promo>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.promo::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,20,20,.96) 35%,rgba(20,20,20,.55) 75%,rgba(20,20,20,.25));z-index:-1}
+.promo h3{font-size:clamp(2.2rem,4vw,3.4rem)}
+.promo h3 em{color:var(--vu-gold)}
+.promo p{color:rgba(255,255,255,.88);max-width:34rem}
+.ticket{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border:1px dashed var(--vu-gold);padding:1rem 1.2rem;margin-top:1rem;background:rgba(20,20,20,.6)}
+.ticket code{font-family:var(--cond);font-size:2rem;letter-spacing:.14em;color:var(--vu-gold)}
+.promo .mascot{position:absolute;right:1.25rem;top:1.25rem;width:120px}
+
+/* small modules row */
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,3rem)}
+.mini .box{border-top:2px solid var(--tx);padding-top:1.4rem}
+
+/* footer */
+footer.site{padding:4rem 0 2.5rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;border-top:1px solid var(--rule);padding-top:2.5rem}
+footer h2{font-size:clamp(2.6rem,6vw,4.6rem);letter-spacing:.04em}
+footer h3{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--vu-gold);margin:0 0 .6rem}
+footer p,footer li{color:rgba(255,255,255,.82);font-size:.95rem;margin:0}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.fine{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;color:rgba(255,255,255,.65)}
+
+/* ---------- article view ---------- */
+.story{display:none}
+.story.on{display:block}
+body.reading #home{display:none}
+.a-hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.a-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.a-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,20,20,.96) 8%,rgba(20,20,20,.45) 55%,rgba(20,20,20,.15));z-index:-1}
+.a-hero .wrap{padding:6rem 0 3.5rem}
+.a-hero h1{font-size:clamp(3rem,8vw,6.6rem);max-width:15ch;line-height:.98}
+.dek{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.4;max-width:42rem;margin:1.3rem 0 0;color:rgba(255,255,255,.9)}
+.byline{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin-top:1.8rem;align-items:center}
+.a-split{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100svh - 64px)}
+.a-split .txt{display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(2rem,5vw,4.5rem) clamp(1.5rem,5vw,4.5rem)}
+.a-split figure{margin:0;position:relative}
+.a-split figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.a-split h1{font-size:clamp(3rem,6.5vw,5.8rem)}
+.body{width:var(--read);margin:0 auto;padding:clamp(3rem,6vw,5rem) 0;font-size:1.15rem;line-height:1.75}
+.body>p{margin:0 0 1.4rem}
+.body>p.drop::first-letter{font-family:var(--display);float:left;font-size:4.6rem;line-height:.82;padding:.35rem .6rem 0 0;color:var(--vu-oak)}
+.body h2{font-size:clamp(1.8rem,3vw,2.4rem);margin:3rem 0 1rem}
+.body .q{font-family:var(--serif);font-weight:400;font-size:1.25rem;line-height:1.4;margin:2.6rem 0 .7rem;color:var(--vu-black);padding-top:1.2rem;border-top:1px solid var(--vu-gold)}
+.body blockquote{margin:3rem calc((var(--read) - min(940px,92vw))/2);padding:2rem 0;border-top:2px solid var(--vu-black);border-bottom:1px solid var(--line);font-family:var(--display);font-size:clamp(1.8rem,3.6vw,2.8rem);line-height:1.15;text-align:center}
+.body blockquote em{font-family:var(--serif);font-style:italic;color:var(--vu-oak)}
+.body blockquote cite{display:block;font-family:var(--cond);font-style:normal;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;margin-top:1rem;color:var(--tx2)}
+.body figure{margin:2.6rem 0}
+.body figure.wide{margin-left:calc((var(--read) - min(1100px,94vw))/2);margin-right:calc((var(--read) - min(1100px,94vw))/2)}
+.body figcaption{font-size:.85rem;color:var(--tx2);margin-top:.6rem;border-left:2px solid var(--vu-gold);padding-left:.7rem}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.duo img,.trio img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.factbox{background:var(--vu-cream);padding:1.6rem 1.8rem;margin:2.4rem 0;font-size:1rem;line-height:1.6}
+.factbox h3{font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.82rem;margin:0 0 .6rem}
+.end{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;justify-content:space-between;border-top:2px solid var(--vu-black);padding-top:1.4rem;margin-top:3rem}
+.end .dingbat{font-family:var(--display);color:var(--vu-oak);font-size:1.4rem}
+.next{border-top:1px solid rgba(207,174,112,.3)}
+.next .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;padding:3rem 0}
+.next a{text-decoration:none;display:block;padding:1.4rem 0}
+.next .dir{font-family:var(--cond);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;color:var(--vu-gold)}
+.next .t{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.2rem);margin-top:.4rem;line-height:1.1}
+.next a:hover .t{text-decoration:underline;text-decoration-color:var(--vu-gold);text-underline-offset:5px}
+.next .r{text-align:right}
+.toast{visibility:hidden;position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%) translateY(150%);background:var(--vu-gold);color:var(--vu-black);font-family:var(--cond);font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.2rem;z-index:100;transition:transform .3s}
+.toast.show{visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .top nav{display:none}
+  .top nav.open{display:block;position:absolute;top:64px;left:0;right:0;background:#141414;border-bottom:1px solid rgba(207,174,112,.3);padding:1rem 4vw}
+  .top nav.open ul{flex-direction:column;gap:.4rem}
+  .menu-btn{display:inline-block}
+  .cover{flex-direction:column;min-height:auto}
+  .cover::before{display:none}
+  .cover .art{position:relative;width:100%;height:46svh;object-position:88% center;order:-1}
+  .cover .copy{padding-top:1.5rem}
+  .masthead{mix-blend-mode:normal}
+}
+@media (max-width:1000px){
+  .top nav.open{display:block;position:absolute;top:64px;left:0;right:0;background:#141414;border-bottom:1px solid rgba(207,174,112,.3);padding:1rem 4vw}
+  .top nav.open ul{flex-direction:column;gap:.4rem}
+  .menu-btn{display:inline-block}
+  .issue-tag{display:none}
+  .lead-grid,.editor,.grat-intro,.shout,.promos,.mini,.a-split{grid-template-columns:1fr}
+  .a-split figure{height:60svh}
+  .row3{grid-template-columns:1fr}
+  .flips{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .body blockquote,.body figure.wide{margin-left:0;margin-right:0}
+}
+@media (max-width:640px){
+  body{font-size:1rem}
+  .brand .word{display:none}
+  .alsoin{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stat{border-left:0;border-top:1px solid var(--rule);padding:1.6rem 0}
+  .stat:first-child{border-top:0}
+  .flips{grid-template-columns:1fr}
+  .flip{min-height:0}
+  .stack .card{grid-template-columns:1fr}
+  .ev{grid-template-columns:80px 1fr}
+  .ev .acts{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+  .duo,.trio{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .next .wrap{grid-template-columns:1fr}
+  .next .r{text-align:left}
+  .sec-head{flex-direction:column;align-items:start}
+  .sec-head .meta{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+@media print{.top,.next,.toast,.end .btn{display:none!important}.story{display:block!important}}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top dark" role="banner">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Illuminate home">
+      <img src="assets/vu-lockup-white.png" alt="Vanderbilt University">
+      <span class="word" aria-hidden="true">ILLUMINATE</span>
+    </a>
+    <nav id="nav" aria-label="Sections">
+      <ul>
+        <li><a href="#story-leaders40" data-sec="cover">Cover Story</a></li>
+        <li><a href="#people" data-sec="people">People</a></li>
+        <li><a href="#leadership" data-sec="leadership">Leadership</a></li>
+        <li><a href="#wellbeing" data-sec="wellbeing">Wellbeing</a></li>
+        <li><a href="#campus" data-sec="campus">Around Campus</a></li>
+      </ul>
+    </nav>
+    <span class="issue-tag">Vol 3.11 · November 2026</span>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- =================== HOME =================== -->
+<div id="home">
+
+  <section class="cover" aria-labelledby="cover-h">
+    <img class="art" src="img/cover-campus-wc.jpg" alt="Watercolor of the Vanderbilt University footbridge under orange and gold autumn leaves.">
+    <div class="copy">
+      <div>
+        <p class="masthead" aria-label="Illuminate">ILLUMINATE</p>
+        <div class="masthead-sub"><span>The Magazine for Vanderbilt Staff</span><span>Vol 3.11 · November 2026</span></div>
+      </div>
+      <div class="coverline">
+        <img class="seal" src="img/leaders40.jpg" alt="Leaders40, World's Top CHROs 2026 badge.">
+        <p class="kicker">Cover Story · Top CHRO 2026</p>
+        <h2 id="cover-h">One of <em>forty</em>.</h2>
+        <p>Vice Chancellor Sydney Savion is named to the 2026 N2Growth Leaders40, a list of the top chief human resources officers in the world.</p>
+        <a class="btn" href="#story-leaders40">Read the cover story <span aria-hidden="true">→</span></a>
+      </div>
+      <nav class="alsoin" aria-label="Also in this issue">
+        <a href="#story-tina-soo"><span class="n">Staff Stories</span><span class="t">Tina Soo on seeing bright futures</span></a>
+        <a href="#story-fall-assembly"><span class="n">Fall Staff Assembly</span><span class="t">The people behind the momentum</span></a>
+        <a href="#campus"><span class="n">Around Campus</span><span class="t">Turkey Toss, tours and tickets</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="band light" id="people" aria-labelledby="people-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="people-h">This <em>month</em>.</h2><span class="meta">People, stories and moments from across Vanderbilt</span></div>
+      <div class="lead-grid">
+        <a class="card big" href="#story-tina-soo">
+          <div class="ph"><img src="img/tina-alumna.jpg" alt="Tina Soo embraces a visiting alumna."></div>
+          <p class="k">Staff Stories</p>
+          <h3>Seeing bright <em>futures</em>.</h3>
+          <p>Program coordinator Tina Soo on the hard work of PhD students, a 1972 alumna's homecoming, and why purpose keeps her here.</p>
+          <p class="rt" data-rt="tina-soo"></p>
+        </a>
+        <div class="stack">
+          <a class="card" href="#story-fall-assembly">
+            <div class="ph"><img src="img/fsa-diermeier.jpg" alt="Chancellor Diermeier speaks at a podium."></div>
+            <div><p class="k">Fall Staff Assembly</p><h3>The staff behind the <em>momentum</em>.</h3><p class="rt" data-rt="fall-assembly"></p></div>
+          </a>
+          <a class="card" href="#story-veterans">
+            <div class="ph"><img src="img/vets-1.jpg" alt="Veterans seated at a breakfast table."></div>
+            <div><p class="k">Veterans Day</p><h3>Honoring those who <em>served</em>.</h3><p class="rt" data-rt="veterans"></p></div>
+          </a>
+          <a class="card" href="#story-acorn">
+            <div class="ph"><img src="img/acorn-3.jpg" alt="A parent and toddler play with clay."></div>
+            <div><p class="k">Child &amp; Family Center</p><h3>One hundred days of <em>clay</em>.</h3><p class="rt" data-rt="acorn"></p></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream" aria-labelledby="ed-h">
+    <div class="wrap editor">
+      <figure><img src="img/bridge.jpg" alt="A campus footbridge framed by orange autumn leaves."></figure>
+      <div>
+        <p class="eyebrow">Editor's Reflection</p>
+        <h2 id="ed-h" class="sr">Editor's Reflection</h2>
+        <blockquote>“Gratitude is something we <em>practice</em>, not only something we say.”</blockquote>
+        <div class="sig"><div><div class="name">Sydney Savion</div><div class="role">Vice Chancellor for People, Culture and Belonging</div></div></div>
+        <a class="btn" href="#story-editor">Read the letter <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" id="leadership" aria-labelledby="mom-h">
+    <div class="wrap">
+      <p class="eyebrow">Sixth Annual Fall Staff Assembly · By the numbers</p>
+      <h2 id="mom-h" style="font-size:clamp(2.4rem,5vw,4.2rem);max-width:18ch;margin-bottom:2.5rem">A year of record <em>demand</em>.</h2>
+      <div class="stats">
+        <div class="stat"><div class="num">$4.5B</div><div class="lab">Raised in Dare to Grow</div></div>
+        <div class="stat"><div class="num">54,000+</div><div class="lab">Class of 2030 applicants</div></div>
+        <div class="stat"><div class="num">4.6%</div><div class="lab">Record low admit rate</div></div>
+      </div>
+      <p class="pull">“Thank you for the talent you bring to Vanderbilt.”<cite>Chancellor Daniel Diermeier</cite></p>
+      <div class="row3" style="border-color:rgba(255,255,255,.14)">
+        <a class="card" href="#story-leadership-redefined">
+          <div class="ph"><img src="img/lr-lee-savion.jpg" alt="Vice Chancellors Candice Storey Lee and Sydney Savion in conversation on stage."></div>
+          <p class="k">Leadership Redefined</p><h3>A fourth cohort <em>convenes</em>.</h3><p class="rt" data-rt="leadership-redefined"></p>
+        </a>
+        <a class="card" href="#story-leaders40">
+          <div class="ph"><img src="img/savion.jpg" alt="Portrait of Sydney Savion." style="object-position:50% 15%"></div>
+          <p class="k">Cover Story</p><h3>One of <em>forty</em>.</h3><p class="rt" data-rt="leaders40"></p>
+        </a>
+        <a class="card" href="#story-anchors-edge">
+          <div class="ph"><img src="img/anchors.jpg" alt="Two colleagues walk and talk down a bright hallway." style="object-position:50% 30%"></div>
+          <p class="k">Anchor's Edge</p><h3>Have a topic in <em>mind</em>?</h3><p class="rt" data-rt="anchors-edge"></p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band cream" id="wellbeing" aria-labelledby="grat-h">
+    <div class="wrap">
+      <div class="grat-intro">
+        <div>
+          <p class="eyebrow">Health, Wellbeing &amp; Belonging</p>
+          <h2 id="grat-h" style="font-size:clamp(2.6rem,6vw,5rem)">Make gratitude a <em>habit</em>.</h2>
+        </div>
+        <p style="margin:0;color:var(--tx2)">Gratitude gets a lot of attention this time of year, but it can be more than a seasonal tradition. Practicing gratitude is simply taking time to notice the people, moments and experiences that bring something positive to our lives. Tap a card to swap the old habit for a new one.</p>
+      </div>
+      <div class="flips" id="flips"></div>
+      <div class="shout">
+        <div>
+          <h3>Give a <em>shoutout</em>.</h3>
+          <p style="color:rgba(255,255,255,.85)">Recognize a colleague who made a difference with a Shoutout in Personify Health. Whether they offered support, went the extra mile or brightened your day, a Shoutout is a simple way to show your appreciation.</p>
+          <p class="meta" style="color:var(--vu-gold);margin-top:1rem">Recognize their impact through Vanderbilt's values</p>
+          <div class="values"><span class="pill">Belonging</span><span class="pill">Self Direction</span><span class="pill">Collaboration</span><span class="pill">Growth</span></div>
+        </div>
+        <div class="double"><strong>Double points in November</strong>Earn double points for giving and receiving Shoutouts all month long.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark" id="campus" aria-labelledby="cal-h">
+    <div class="wrap">
+      <div class="sec-head" style="border-color:var(--vu-gold)"><h2 id="cal-h">Around <em>campus</em>.</h2><span class="meta">Events and updates · Times are Central</span></div>
+      <div class="filters" role="group" aria-label="Filter events">
+        <button class="chip" aria-pressed="true" data-f="all">All</button>
+        <button class="chip" aria-pressed="false" data-f="celebrate">Celebrations</button>
+        <button class="chip" aria-pressed="false" data-f="wellbeing">Wellbeing</button>
+        <button class="chip" aria-pressed="false" data-f="learn">Learning</button>
+      </div>
+      <p class="sr" aria-live="polite" id="ev-status"></p>
+      <ul class="events" id="events"></ul>
+    </div>
+  </section>
+
+  <section class="band dark" style="padding-top:0" aria-label="Holiday offers">
+    <div class="wrap promos">
+      <article class="promo">
+        <img class="bg" src="img/turkey-1.jpg" alt="">
+        <img class="mascot" src="img/turkey-mascot.png" alt="">
+        <p class="eyebrow">An annual tradition</p>
+        <h3>Turkey <em>Toss</em>.</h3>
+        <p><strong>December 11, 6 a.m. to 6 p.m., Student Life Center.</strong> Choose a Vanderbilt beanie or a frozen turkey, including regular, halal and tofurkey options. Light refreshments, games, winter crafts and swag. Bring your Vanderbilt ID or proof of employment.</p>
+        <div><button class="btn" data-ics="turkey">Copy event details</button></div>
+      </article>
+      <article class="promo">
+        <img class="bg" src="img/football.jpg" alt="">
+        <p class="eyebrow">A small thank you</p>
+        <h3>Black and gold, no <em>orange</em>.</h3>
+        <p>Working over Thanksgiving? Vanderbilt Athletics is offering eligible staff up to two complimentary tickets to the final home game against Tennessee on Nov. 28, while supplies last. Kickoff is 6 or 6:30 p.m.</p>
+        <div class="ticket"><div><span class="meta" style="color:#fff">Promo code · Admit up to two</span><br><code id="promo">VUEFBUT</code></div><button class="btn" id="copy-code">Copy code</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band light" aria-label="More from this issue">
+    <div class="wrap mini">
+      <div class="box">
+        <p class="eyebrow">Health, Wellbeing &amp; Belonging</p>
+        <h2 style="font-size:2.2rem">Set goals and save for what you <em>want</em>.</h2>
+        <p style="color:var(--tx2)">A webinar on practical strategies for establishing, prioritizing and funding the savings goals that matter most to you, from a vacation to an emergency fund. Held Thursday, November 19.</p>
+      </div>
+      <div class="box">
+        <p class="eyebrow">Stay connected</p>
+        <h2 style="font-size:2.2rem">Follow <em>PCB</em>.</h2>
+        <p style="color:var(--tx2)">Connect with People, Culture and Belonging for the latest news, events and resources.</p>
+        <p style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem"><a class="btn" href="https://instagram.com/vupcb">Instagram @vupcb</a><a class="btn" href="https://linkedin.com/company/vu-pcb">LinkedIn VU PCB</a></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =================== STORIES =================== -->
+
+<article class="story light" id="s-leaders40" data-title="One of forty." aria-labelledby="h-leaders40">
+  <div class="a-split dark">
+    <div class="txt">
+      <p class="eyebrow">Cover Story · 2026 N2Growth Leaders40</p>
+      <h1 id="h-leaders40" tabindex="-1">One of <em>forty</em>.</h1>
+      <p class="dek">Sydney Savion, Vice Chancellor of People, Culture and Belonging, is among 40 executives worldwide recognized with the 2026 Top Chief Human Resources Officer Award.</p>
+      <div class="byline"><span class="meta">Illuminate staff</span><span class="meta rtx"></span></div>
+    </div>
+    <figure><img src="img/savion.jpg" alt="Portrait of Vice Chancellor Sydney Savion." style="object-position:50% 20%"></figure>
+  </div>
+  <div class="body">
+    <p class="drop">The annual N2Growth Leaders40 award is the benchmark for excellence in human resources. It celebrates the leaders shaping careers, cultures and talent at the world's most people-driven companies. This year, Vanderbilt's Sydney Savion is one of them.</p>
+    <p>Since joining Vanderbilt University in January 2024 as its inaugural Vice Chancellor for People, Culture and Belonging, Savion has built and led a transformative division responsible for the university's enterprise-wide people strategy. That work spans workforce development, employee experience, total rewards, health and wellbeing, and organizational culture.</p>
+    <p>Under her leadership, Vanderbilt has introduced the Talent Marketplace, the Futures Learning Hub, Vanderbilt Voyage and a modernized approach to performance management, creating new pathways for employee growth, leadership development and career mobility. Her work is positioning Vanderbilt as a forward-thinking employer of choice, building the workforce infrastructure, culture and capabilities the university needs for its continued growth.</p>
+    <blockquote>“Sydney leads from the front. She knows staff of every level and station by <em>name</em>.”<cite>Tony Morales, Chairman of N2Growth</cite></blockquote>
+    <p>Morales went on to note that she stays highly visible on campus and makes clear that getting culture right is a strategic imperative for Vanderbilt.</p>
+    <div class="factbox">
+      <h3>About the award</h3>
+      <p>The Leaders40 Top CHRO Award was first published on Forbes in 2015 and later co-launched with the Stanford Graduate School of Business in 2020 to strengthen the academic rigor of its methodology. Each year the N2Growth selection committee evaluates thousands of nominations, interviews hundreds of executives and selects 40 CHROs who represent the standard of excellence in human capital management.</p>
+      <p style="margin-top:.8rem"><a href="https://www.n2growth.com/top-chro-list-the-people-leaders-to-watch/">See the full list of honorees</a></p>
+    </div>
+  </div>
+</article>
+
+<article class="story light" id="s-editor" data-title="Editor's Reflection" aria-labelledby="h-editor">
+  <header class="a-hero dark"><img src="img/bridge.jpg" alt=""><div class="wrap">
+    <p class="eyebrow">Editor's Reflection</p>
+    <h1 id="h-editor" tabindex="-1">The ones who hold us <em>up</em>.</h1>
+    <div class="byline"><span class="meta">By Sydney Savion</span><span class="meta rtx"></span></div>
+  </div></header>
+  <div class="body">
+    <p class="drop">November invites us to slow down and recognize the people who make a difference in our lives. With Veterans Day just behind us and Thanksgiving ahead, I have been thinking about gratitude, not only as something we say, but as something we practice.</p>
+    <p>My time in the United States Air Force taught me that no mission is accomplished alone. Every success rests on people who hold each other up, especially when things are hard. I see that at Vanderbilt every day.</p>
+    <p>To our colleagues who have served in every branch of the Armed Forces: thank you. Vanderbilt is stronger because of the experience and leadership you bring.</p>
+    <p>Gratitude also lives in everyday moments: a colleague who steps in on a tough project, a leader who sees someone's potential, a simple thank you that reminds someone their work matters. Small moments, taken together, shape our culture.</p>
+    <p>So this season, tell someone you appreciate them. Thank a colleague whose work happens behind the scenes.</p>
+    <p>To every member of our Vanderbilt community: I can't take credit for the phrase, but you are “the ones who hold us up.” Thank you.</p>
+    <p>It's Our Moment!</p>
+    <div class="sig"><div><div class="name">Sydney</div><div class="role">Sydney Savion, Vice Chancellor for People, Culture and Belonging</div></div></div>
+  </div>
+</article>
+
+<article class="story light" id="s-tina-soo" data-title="Seeing bright futures." aria-labelledby="h-tina">
+  <div class="a-split dark">
+    <figure><img src="img/tina-office.jpg" alt="Tina Soo seated at her desk in the Department of Economics." style="object-position:50% 40%"></figure>
+    <div class="txt">
+      <p class="eyebrow">Staff Stories · Conversations with the people shaping Vanderbilt</p>
+      <h1 id="h-tina" tabindex="-1">Seeing bright <em>futures</em>.</h1>
+      <p class="dek">Tina Soo, Program Coordinator in the Department of Economics, on graduate students, a homecoming 54 years in the making, and finding purpose in other people's growth.</p>
+      <div class="byline"><span class="meta">Q&amp;A</span><span class="meta rtx"></span></div>
+    </div>
+  </div>
+  <div class="body">
+    <p class="q">What is your name, the department you work for, and your title?</p>
+    <p>My name is Tina Soo, and I work for the Department of Economics as a program coordinator for the Graduate Program in Economic Development and the Economics PhD.</p>
+    <p class="q">Tell us about your career path that led you to your current role at Vanderbilt.</p>
+    <p>I graduated with a degree in Economics a long time ago, and worked at Belmont part time for about five years. After that I took a break, and now I've been at Vanderbilt for almost three years. I started out as a program specialist working with undergrads and now work with masters and PhD students.</p>
+    <p class="q">What drew you to work at Vanderbilt?</p>
+    <p>I love working in academia. Getting the opportunity to interact with students, and see through their eyes just how bright everyone's future is, brings me a lot of joy.</p>
+    <p class="q">What is one aspect of your job that might surprise others?</p>
+    <p>I think for me it's very surprising how hard the students here work. Since I didn't get a PhD, I didn't realize how long the hours were or how much they work.</p>
+    <blockquote>“If I have contributed to any of that, then it gives me <em>purpose</em>.”<cite>Tina Soo</cite></blockquote>
+    <p class="q">Do you have a favorite meaningful moment of working at Vanderbilt?</p>
+    <p>Yes, I do! This past summer we had an alumna who graduated from our masters program in 1972 come to visit. She's from Turkey and this is the first time she's been back to Nashville since graduating. Her sons brought her back, and she was telling us about her time here, and remembering all the different things, and it was so sweet. Because it was summertime, she sat in one of the empty classrooms and pretended she was studying, and her sons took so many pictures, so that is something that really touched my heart.</p>
+    <figure class="wide"><div class="duo"><img src="img/tina-alumna.jpg" alt="Tina Soo hugs the visiting 1972 alumna."><img src="img/tina-reading.jpg" alt="Tina Soo reads an issue of Illuminate on a couch." style="object-position:50% 35%"></div><figcaption>Tina Soo with a 1972 alumna of the masters program, back in Nashville for the first time since graduating.</figcaption></figure>
+    <p class="q">Looking ahead, what keeps you motivated and engaged in your work?</p>
+    <p>What keeps me motivated is seeing our students progress every year. From their first year to when they graduate there's lots of maturity and growth. It's always changing, from what they know to their energy and how they feel, so that's really exciting.</p>
+    <p class="q">Do you have a piece of advice for someone starting at Vanderbilt?</p>
+    <p>I feel that Vanderbilt is very welcoming and there are so many things that you can do here, so do your best and if you ever want to explore something that you think is interesting, Vanderbilt probably has it. That's what I love most about Vanderbilt; that no matter what your background is, you can find something here that is a good fit for you.</p>
+    <p class="q">Why do you choose to stay and grow your career at Vanderbilt?</p>
+    <p>I just love seeing the growth of each of the individual students. It keeps me motivated and makes me happy. I feel like if I have contributed to any of that, then it gives me purpose.</p>
+    <p class="q">What is your favorite spot on campus?</p>
+    <p>There is this beautiful statue that is right outside Calhoun. If you walk out of the building it is to the left. I love all that bronze, so that is my favorite spot.</p>
+  </div>
+</article>
+
+<article class="story light" id="s-fall-assembly" data-title="The staff behind the momentum." aria-labelledby="h-fsa">
+  <header class="a-hero dark"><img src="img/fsa-crowd.jpg" alt=""><div class="wrap">
+    <p class="eyebrow">Sixth Annual Fall Staff Assembly</p>
+    <h1 id="h-fsa" tabindex="-1">The staff behind the <em>momentum</em>.</h1>
+    <p class="dek">Held Nov. 2 in Langford Auditorium, at the end of a year of record student demand and the close of the Dare to Grow campaign.</p>
+    <div class="byline"><span class="meta">Illuminate staff</span><span class="meta rtx"></span></div>
+  </div></header>
+  <div class="body">
+    <p class="drop">The sixth annual Fall Staff Assembly gathered staff from across the university to mark a year of milestones: $4.5 billion raised in Dare to Grow, more than 54,000 applicants for the Class of 2030, and a record low admit rate of 4.6 percent.</p>
+    <figure class="wide"><img src="img/fsa-diermeier.jpg" alt="Chancellor Daniel Diermeier addresses the assembly." style="aspect-ratio:16/9;object-fit:cover;width:100%;object-position:50% 25%"><figcaption>Chancellor Daniel Diermeier</figcaption></figure>
+    <blockquote>“I hope Vanderbilt is a place where you can see the difference your work <em>makes</em>.”<cite>Chancellor Daniel Diermeier</cite></blockquote>
+    <p>The Chancellor continued: “Where you can continue to grow into your own fullest potential. And where you can take pride not only in what we accomplish together, but in the way we accomplish it: with excellence, with care and with a deep sense of responsibility to one another. Thank you for the talent you bring to Vanderbilt.”</p>
+    <h2>From the <em>podium</em>.</h2>
+    <p>USAC President Jeremy Bourgoin reported wins on parental leave, holidays and the retirement match. Vice Chancellor Sydney Savion closed with a charge to the room: “Keep showing up for each other the way you already do.”</p>
+    <figure><div class="duo"><img src="img/fsa-savion.jpg" alt="Vice Chancellor Sydney Savion speaks at the podium." style="aspect-ratio:4/5;object-position:50% 20%"><img src="img/fsa-bourgoin.jpg" alt="USAC President Jeremy Bourgoin speaks at the podium." style="aspect-ratio:4/5;object-position:50% 20%"></div><figcaption>Vice Chancellor Sydney Savion and USAC President Jeremy Bourgoin</figcaption></figure>
+    <h2>Staff <em>awards</em>.</h2>
+    <p>Staff were honored in seven categories: Community Impact, Innovation Excellence, Leadership Excellence, Professional Excellence, Research Excellence, Student Impact and Dare to Grow.</p>
+    <h2>Thanks from <em>students</em>.</h2>
+    <figure><img src="img/fsa-kylar.jpg" alt="Senior Kylar Larson at the podium." style="width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 20%"><figcaption>Senior Kylar Larson</figcaption></figure>
+    <p>Senior Kylar Larson introduced a video tribute from undergraduates and thanked staff on behalf of the student body.</p>
+  </div>
+</article>
+
+<article class="story light" id="s-veterans" data-title="Honoring those who served." aria-labelledby="h-vets">
+  <header class="a-hero dark"><img src="img/vets-1.jpg" alt=""><div class="wrap">
+    <p class="eyebrow">Veterans Day Breakfast</p>
+    <h1 id="h-vets" tabindex="-1">Honoring those who <em>served</em>.</h1>
+    <p class="dek">This year's Veterans Day Breakfast brought Vanderbilt veterans together in recognition of their service, sacrifice and contributions to the university community.</p>
+    <div class="byline"><span class="meta">Illuminate staff</span><span class="meta rtx"></span></div>
+  </div></header>
+  <div class="body">
+    <p class="drop">The event provided an opportunity to express gratitude to those who have served in the Armed Forces and to recognize the experiences, leadership and perspectives they bring to Vanderbilt.</p>
+    <figure class="wide"><img src="img/vets-2.jpg" alt="A speaker addresses the breakfast from a Vanderbilt podium flanked by service flags." style="width:100%;aspect-ratio:21/9;object-fit:cover"></figure>
+    <figure class="wide"><div class="trio"><img src="img/vets-3.jpg" alt="Attendees seated before the stage."><img src="img/vets-4.jpg" alt="Veterans gathered at the front of the room."><img src="img/vets-6.jpg" alt="Guests in uniform at a breakfast table."></div></figure>
+    <blockquote>To all veterans, thank you for your <em>service</em>.<cite>People, Culture and Belonging</cite></blockquote>
+    <p>We are grateful to have you as part of the Vanderbilt community.</p>
+  </div>
+</article>
+
+<article class="story light" id="s-leadership-redefined" data-title="A fourth cohort convenes." aria-labelledby="h-lr">
+  <header class="a-hero dark"><img src="img/lr-audience.jpg" alt=""><div class="wrap">
+    <p class="eyebrow">Leadership Redefined Symposium</p>
+    <h1 id="h-lr" tabindex="-1">A fourth cohort <em>convenes</em>.</h1>
+    <p class="dek">On Thursday, October 29, PCB hosted the Leadership Redefined Symposium for its fourth cohort.</p>
+    <div class="byline"><span class="meta">Illuminate staff</span><span class="meta rtx"></span></div>
+  </div></header>
+  <div class="body">
+    <p class="drop">Speakers included Chancellor Daniel Diermeier and Vice Chancellors Steve Ertel, John Lutz, Candice Storey Lee and Sydney Savion.</p>
+    <p>Leadership Redefined is Vanderbilt University's premier development program for leaders, sponsored by the Chancellor. Grounded in the university's bold vision and culture, the program challenges participants to explore, shape and redefine what leadership means in a complex, rapidly changing environment.</p>
+    <figure class="wide"><img src="img/lr-diermeier.jpg" alt="Chancellor Diermeier presents in front of a map projection." style="width:100%;aspect-ratio:16/8;object-fit:cover"><figcaption>Chancellor Diermeier</figcaption></figure>
+    <figure><div class="duo"><img src="img/lr-lutz.jpg" alt="Vice Chancellor John Lutz speaks."><img src="img/lr-ertel.jpg" alt="Vice Chancellor Steve Ertel speaks at a podium."></div><figcaption>Vice Chancellors John Lutz and Steve Ertel</figcaption></figure>
+    <figure class="wide"><img src="img/lr-lee-savion.jpg" alt="Vice Chancellors Candice Storey Lee and Sydney Savion seated on stage." style="width:100%;aspect-ratio:16/9;object-fit:cover"><figcaption>Vice Chancellors Candice Storey Lee and Sydney Savion. The symposium opened with a performance by Third Coast Comedy.</figcaption></figure>
+  </div>
+</article>
+
+<article class="story light" id="s-acorn" data-title="One hundred days of clay." aria-labelledby="h-acorn">
+  <header class="a-hero dark"><img src="img/acorn-3.jpg" alt=""><div class="wrap">
+    <p class="eyebrow">Vanderbilt Child &amp; Family Center</p>
+    <h1 id="h-acorn" tabindex="-1">One hundred days of <em>clay</em>.</h1>
+    <p class="dek">During Acorn's annual Back to School Night on October 27, families joined their children for creative play.</p>
+    <div class="byline"><span class="meta">Illuminate staff</span><span class="meta rtx"></span></div>
+  </div></header>
+  <div class="body">
+    <p class="drop">Back to School Night activities were part of the 100 Days of Clay initiative. Launched in 2025, the initiative offers daily, age-appropriate opportunities for children to explore clay and clay-like materials through hands-on sensory play, encouraging creativity, emotional expression and imaginative thinking.</p>
+    <figure class="wide"><div class="trio"><img src="img/acorn-2.jpg" alt="A parent and child shape clay at a table."><img src="img/acorn-4.jpg" alt="A toddler works with clay alongside a parent."><img src="img/acorn-1.jpg" alt="A father helps his daughter at a classroom sink."></div><figcaption>Families at Acorn's Back to School Night</figcaption></figure>
+  </div>
+</article>
+
+<article class="story light" id="s-anchors-edge" data-title="Have a topic in mind?" aria-labelledby="h-ae">
+  <div class="a-split dark">
+    <div class="txt">
+      <p class="eyebrow">Anchor's Edge</p>
+      <h1 id="h-ae" tabindex="-1">Have a topic in <em>mind</em>?</h1>
+      <p class="dek">Anchor's Edge webinars are postponed until further notice, but we're always looking for new ideas.</p>
+      <div class="byline"><span class="meta rtx"></span></div>
+    </div>
+    <figure><img src="img/anchors.jpg" alt="Two colleagues walk and talk down a bright hallway." style="object-position:50% 30%"></figure>
+  </div>
+  <div class="body">
+    <p class="drop">Is there a topic you'd like to explore or something you're passionate about sharing? Suggest a future webinar topic or express your interest in presenting, and help shape future Anchor's Edge conversations.</p>
+    <p>Contact Justin Grunert at <a href="mailto:justin.grunert@vanderbilt.edu">justin.grunert@vanderbilt.edu</a>.</p>
+  </div>
+</article>
+
+<nav class="next dark" id="next" aria-label="More stories" hidden>
+  <div class="wrap"><a id="prev-a" href="#top"><span class="dir">← Previous</span><span class="t"></span></a><a id="next-a" class="r" href="#top"><span class="dir">Next story →</span><span class="t"></span></a></div>
+</nav>
+</main>
+
+<footer class="site dark" id="contact">
+  <div class="wrap">
+    <h2>Let's <em>connect</em>.</h2>
+    <div class="foot-grid" style="margin-top:2rem">
+      <div><img src="assets/vu-lockup-white.png" alt="Vanderbilt University" style="height:34px;width:auto;margin-bottom:1rem"><p>Illuminate is published monthly by People, Culture and Belonging for Vanderbilt staff.</p></div>
+      <div><h3>Website</h3><p><a href="https://www.vanderbilt.edu/pcb">vanderbilt.edu/pcb</a></p><h3 style="margin-top:1.2rem">Email</h3><p><a href="mailto:pcb@vanderbilt.edu">pcb@vanderbilt.edu</a></p></div>
+      <div><h3>Address</h3><p>110 21st Ave S, Suite 1000<br>Baker Building</p><h3 style="margin-top:1.2rem">Curious Bar</h3><p>Check website for location</p></div>
+      <div><h3>Follow PCB</h3><ul><li><a href="https://instagram.com/vupcb">Instagram @vupcb</a></li><li><a href="https://linkedin.com/company/vu-pcb">LinkedIn VU PCB</a></li></ul></div>
+    </div>
+    <div class="fine"><span>Vol 3.11 · November 2026 · Anchor Down!</span><span>Accessibility: built to WCAG 2.2 AA. Trouble reading this issue? Email <a href="mailto:pcb@vanderbilt.edu">pcb@vanderbilt.edu</a>.</span></div>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+
+<script>
+(function(){
+  var ORDER=['leaders40','editor','tina-soo','fall-assembly','veterans','leadership-redefined','acorn','anchors-edge'];
+  var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
+  // links out open in new tab
+  $$('a[href^="http"]').forEach(function(a){a.target='_blank';a.rel='noopener'});
+
+  // read times
+  function rt(id){var el=document.getElementById('s-'+id);if(!el)return '';var w=el.textContent.trim().split(/\s+/).length;return Math.max(1,Math.round(w/230))+' min read'}
+  $$('[data-rt]').forEach(function(p){p.textContent=rt(p.dataset.rt)});
+  ORDER.forEach(function(id){var el=document.getElementById('s-'+id);$$('.rtx',el).forEach(function(s){s.textContent=rt(id)})});
+
+  // gratitude cards
+  var G=[['Notice the good','Focusing on what didn\'t go as planned.','Pause and notice one thing that went well, no matter how small.'],
+    ['Name what matters','“I\'m grateful for my coworkers.”','“I\'m grateful my coworker checked in before my presentation.”'],
+    ['Share your appreciation','Thinking: “That was really helpful.”','Tell them: “Thanks for taking the lead on that call.”'],
+    ['Make it a habit','Only noticing the good on special occasions.','Think of something you\'re grateful for before bed.'],
+    ['Savor simple moments','Moving through your day on autopilot.','Enjoy your morning coffee or the crisp fall air.']];
+  var fl=$('#flips');
+  G.forEach(function(g){var b=document.createElement('button');b.className='flip';b.type='button';b.setAttribute('aria-pressed','false');
+    b.innerHTML='<span class="hab">'+g[0]+'</span><span><span class="lbl">Instead of</span><span class="txt">'+g[1]+'</span></span><span class="hint">Tap to see what to try <span aria-hidden="true">→</span></span>';
+    b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);
+      $('.lbl',b).textContent=on?'Try this':'Instead of';$('.txt',b).textContent=on?g[2]:g[1];$('.hint',b).innerHTML=on?'Tap to flip back':'Tap to see what to try <span aria-hidden="true">→</span>'});
+    fl.appendChild(b)});
+
+  // events
+  var E=[
+    {id:'football',cat:'celebrate',mo:'Nov',d:28,dw:'Saturday',y:2026,s:'1800',e:'2130',t:'Vanderbilt vs. Tennessee',w:'FirstBank Stadium · Kickoff 6 or 6:30 p.m.',p:'Complimentary tickets for eligible staff working over the holiday, up to two per person while supplies last. Promo code VUEFBUT. Wear black and gold.'},
+    {id:'benefits',cat:'wellbeing',mo:'Dec',d:2,dw:'Wednesday',y:2026,s:'0900',e:'1500',t:'Benefits Holiday Celebration',w:'Carmichael Conference Room 1406 · 9 a.m. to 3 p.m.',p:'Festive treats, giveaways, holiday activities and a first look at what is new in 2027 for your health and wellbeing.',more:'We are collecting new books, blankets and stuffed animals for the Monroe Carell Jr. Children\'s Hospital at Vanderbilt. Donation bins will be by check-in. Questions? Email pcb@vanderbilt.edu.'},
+    {id:'wave',cat:'wellbeing',mo:'Dec',d:3,dw:'Thursday',y:2026,s:'0830',e:'1000',t:'WAVE Coffee Break',w:'Sarratt 325/327 · 8:30 to 10 a.m.',p:'The Women\'s Advancement, Visibility and Empowerment Affinity Group hosts coffee, treats and conversation. Open to all faculty and staff who support its mission.',more:'WAVE fosters an inclusive community dedicated to advancing and empowering women while engaging allies across Vanderbilt. For more information, contact Laura Kramer or Stacey Crowhurst. Explore Employee Affinity Groups at vanderbilt.edu/hwb/eag or email wellbeing@vanderbilt.edu.'},
+    {id:'civil',cat:'learn',mo:'Dec',d:8,dw:'Tuesday',y:2026,s:'1200',e:'1230',t:'Tour Tuesday: Vanderbilt and the Civil War',w:'Meet at Eskind Biomedical Library · Noon to 12:30 p.m.',p:'A walking tour of how Nashville\'s transformation into a major military stronghold reached the land where campus stands today.',more:'Led by longtime Vanderbilt professor and grants manager Brandon Hulette, the tour visits key locations and shows how modern research is revealing new details about the people, places and events connected to this chapter of university history.'},
+    {id:'turkey',cat:'celebrate',mo:'Dec',d:11,dw:'Friday',y:2026,s:'0600',e:'1800',t:'Turkey Toss',w:'Student Life Center · 6 a.m. to 6 p.m.',p:'An annual tradition. Choose a Vanderbilt beanie or a frozen turkey (regular, halal or tofurkey), plus refreshments, games, winter crafts and swag. Bring your Vanderbilt ID or proof of employment.'},
+    {id:'goals',cat:'wellbeing',mo:'Nov',d:19,dw:'Thursday',y:2026,s:'1300',e:'1400',t:'Set Goals and Save for What You Want',w:'Webinar · 1 p.m.',p:'Practical strategies for establishing, prioritizing and funding the savings goals that matter most to you.',past:true}
+  ];
+  E.sort(function(a,b){return (a.past?1:0)-(b.past?1:0)||new Date(a.mo+' '+a.d+' '+a.y)-new Date(b.mo+' '+b.d+' '+b.y)});
+  var ul=$('#events');
+  E.forEach(function(ev){var li=document.createElement('li');li.className='ev'+(ev.past?' past':'');li.dataset.cat=ev.cat;
+    li.innerHTML='<div class="date" aria-hidden="true"><div class="mo">'+ev.mo+'</div><div class="d">'+ev.d+'</div><div class="dw">'+ev.dw.slice(0,3)+'</div></div>'+
+      '<div><h3>'+ev.t+(ev.past?'<span class="tag">Past</span>':'')+'</h3><p class="where"><span class="sr">'+ev.dw+', '+ev.mo+' '+ev.d+'. </span>'+ev.w+'</p><p>'+ev.p+'</p>'+(ev.more?'<details><summary>More details</summary><p>'+ev.more+'</p></details>':'')+'</div>'+
+      '<div class="acts">'+(ev.past?'':'<button class="btn ghost" data-ics="'+ev.id+'">Copy details<span class="sr">: '+ev.t+'</span></button>')+'</div>';
+    ul.appendChild(li)});
+  $$('.chip').forEach(function(c){c.addEventListener('click',function(){$$('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+    var f=c.dataset.f,n=0;$$('.ev').forEach(function(li){var show=f==='all'||li.dataset.cat===f;li.hidden=!show;if(show)n++});
+    $('#ev-status').textContent=n+' events shown'})});
+
+  function ics(id){var ev=E.filter(function(x){return x.id===id})[0];if(!ev)return;
+    var txt=ev.t+'\n'+ev.dw+', '+({Nov:'November',Dec:'December'})[ev.mo]+' '+ev.d+', '+ev.y+'\n'+ev.w+'\n\n'+ev.p;
+    copy(txt,'Event details copied')}
+  function copy(t,ok){try{navigator.clipboard.writeText(t).then(function(){toast(ok)},function(){toast('Copy not available here')})}catch(e){toast('Copy not available here')}}
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-ics]');if(b)ics(b.dataset.ics)});
+
+  var tt;function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2400)}
+  $('#copy-code').addEventListener('click',function(){copy('VUEFBUT','Code copied: VUEFBUT')});
+
+  // menu
+  var mb=$('.menu-btn'),nav=$('#nav');mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  nav.addEventListener('click',function(){nav.classList.remove('open');mb.setAttribute('aria-expanded','false')});
+
+  // router
+  var stories=$$('.story'),nextNav=$('#next'),bar=$('.progress');
+  function route(){var h=(location.hash||'').slice(1),m;
+    stories.forEach(function(s){s.classList.remove('on')});
+    $$('.top nav a').forEach(function(a){a.removeAttribute('aria-current')});
+    if((m=h.match(/^story-([\w-]+)$/))&&document.getElementById('s-'+m[1])){
+      var id=m[1],el=document.getElementById('s-'+id);document.body.classList.add('reading');el.classList.add('on');
+      var i=ORDER.indexOf(id),p=ORDER[(i-1+ORDER.length)%ORDER.length],n=ORDER[(i+1)%ORDER.length];
+      $('#prev-a').href='#story-'+p;$('#prev-a .t').textContent=document.getElementById('s-'+p).dataset.title;
+      $('#next-a').href='#story-'+n;$('#next-a .t').textContent=document.getElementById('s-'+n).dataset.title;
+      nextNav.hidden=false;document.title=el.dataset.title+' · Illuminate';
+      if(id==='leaders40')$('.top nav a[data-sec="cover"]').setAttribute('aria-current','true');
+      window.scrollTo(0,0);var h1=$('h1',el);h1&&h1.focus({preventScroll:true});
+    } else {
+      var was=document.body.classList.contains('reading');
+      document.body.classList.remove('reading');nextNav.hidden=true;document.title='Illuminate · The Magazine for Vanderbilt Staff · November 2026';
+      var t=h&&h!=='top'&&document.getElementById(h);
+      if(t){var na=$('.top nav a[data-sec="'+h+'"]');na&&na.setAttribute('aria-current','true');
+        requestAnimationFrame(function(){t.scrollIntoView();var hd=$('h2',t);if(hd){hd.setAttribute('tabindex','-1');hd.focus({preventScroll:true})}})}
+      else window.scrollTo(0,0);
+    }
+    onScroll();
+  }
+  function onScroll(){if(!document.body.classList.contains('reading')){bar.style.width=0;return}
+    var d=document.documentElement,max=d.scrollHeight-innerHeight;bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'}
+  addEventListener('hashchange',route);addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('keydown',function(e){if(!document.body.classList.contains('reading')||/INPUT|TEXTAREA|BUTTON|SUMMARY/.test(e.target.tagName))return;
+    if(e.key==='ArrowRight')location.hash=$('#next-a').getAttribute('href');if(e.key==='ArrowLeft')location.hash=$('#prev-a').getAttribute('href');if(e.key==='Escape')location.hash='#top'});
+  route();
+})();
+</script>
+</body>
+</html>
